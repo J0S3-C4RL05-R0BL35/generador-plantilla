@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/app.css">
+    <title>Document</title>
+</head>
+<body>
+<div class="content">
+    <h1 class="titulo">LAYOUT INSTALACIONES</h1>
+    <div class="botones">
+        <a href="#" class="btnInstalaciones">Instalaciones</a>
+        
+        <div class="formularios" hidden="true">
+            <div class="form-instalaciones">
+                <form action="post" id="form-action">
+                    <p>Ingeniero: </p><input id="nombre" type="text" name="">
+                    <p>Fecha:</p><input id="fecha" type="date" name="">
+                    <p>Banco:</p><input id="banco" type="text" name="">
+                    <p>Sucursal:</p><input id="sucursal" type="text" name="" >
+                    <p>Id:</p><input id="id" type="text" name="">
+                    <p>LLamada:</p><input id="llamada" type="text" name="" value="N/A">
+                    <p>Tiket:</p><input id="tiket" type="text" name="">
+                    <p>Tarea:</p><input id="tarea" type="text" name="">
+                    <p>Serie del equipo:</p><input id="serieEquipo" type="text" name="">
+                    <p>Modelo:</p><input id="modelo" type="text" name="">
+                    <p>Hora inicio viaje:</p><input id="horaInicioViaje" type="time" name="">
+                    <p>Hora de llegada:</p><input id="horaLlegada" type="time" name="">
+                    <p>Hora de inicio rep:</p><input id="horaInicioRep" type="time" name="">
+                    <p>Hora termino rep:</p><input id="horaTerminoRep" type="time" name="">
+                    <p>Hora de validación Bco:</p><input id="horaValidacionBco" type="time" name="">
+                    <p>Falla Reportada:</p><input id="fallaReportada" type="text" name="">
+                    <p>Comentarios:</p><TExtarea id="comentarios"></TExtarea>
+                    <p>Falla encontrada:</p><input id="fallaEncontrada" type="text" name="">
+                    <p>Causa:</p><input id="causa" type="text" name="">
+                    <p>Solución:</p><input id="solucion" type="text" name="">
+                    <p>Codigo de intervencion:</p><input id="codigoIntervencion" type="text" name="">
+                    <p>Valida en linea:</p><input id="validaLinea" type="text" name="">
+                    <p>Valida en sitio:</p><input id="validaSitio" type="text" name="">
+                    <p>Aire acondicionado:</p><input id="aireAcondicionado" type="text" name="">
+                    <p>Regulador (Solo remoto):</p><input id="regulador" type="text" name="">
+                    <p>Condiciones fisicas:</p><input id="condiciones" type="text" name="">
+                    <p>Voltajes:</p><input id="voltajes" type="text" name="">
+                    <p>N. de parte:</p><input id="numParte" type="text" name="" value="N/A">
+                    <p>Descripción de la parte:</p><input id="descripcionParte" type="text" name="" value="N/A">
+                    <p>Cantidad:</p><input id="cantidad" type="text" name="" value="N/A">
+                    <p>N/S instalada:</p><input id="NSInstalada" type="text" name="" value="N/A">
+                    <p>N/S retirada:</p><input id="NSRetirada" type="text" name="" value="N/A">
+                    <p>Km:</p><input id="kilometros" type="text" name="">
+                </form>
+            </div>
+
+        </div>
+
+        <!-- <a href="#" class="btnLayout">Plantillas guardadas</a> -->
+        <!-- <a href="#" class="btnCorrectivos">Correctivos</a> -->
+        <a href="#" class="btnGuardar deshabilitar" >generar layout</a>
+        <a href="#" class="btnCopiar deshabilitar">Copiar</a>
+    </div>
+    
+        <!-- <div class="form-correctivos">
+            <p>diebold Nixdorf: </p><input type="text" name="" id="">
+            <p>Servicio:</p><input type="text" name="" id="">
+            <p>Tarea:</p><input type="text" name="" id="">
+            <p>Id ATM:</p><input type="text" name="" id="">
+            <p>Nombre del sitio:</p><input type="text" name="" id="">
+            <p>Marca y modelo ATM:</p><input type="text" name="" id="">
+            <p>serie:</p><input type="text" name="" id="">
+        </div> -->
+    <div class="salida-plantilla">
+    </div>
+</div>
+<script src="/js/app.js"></script>
+</body>
+</html>
