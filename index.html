@@ -6,18 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/app.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Generador de Layout</title>
 </head>
 <body>
-<div class="content">
-    <h1 class="titulo">LAYOUT INSTALACIONES</h1>
-    <div class="botones">
-        <a href="#" class="btnInstalaciones">Instalaciones</a>
-        
-        <div class="formularios" hidden="true">
+    <div class="content">
+        <h1 class="titulo">LAYOUT INSTALACIONES</h1>
+        <div class="botones">
+            <a href="#" class="btnInstalaciones">Instalaciones</a>
+            
+            <div class="formularios" hidden="true">
+            <a href="#" class="btnSalvar"><img src="./icons/save_FILL0_wght400_GRAD0_opsz48.svg" alt="guardar"></a>
             <div class="form-instalaciones">
                 <form action="post" id="form-action">
-                    <p>Ingeniero: </p><input id="nombre" type="text" name="">
+                    <p>Ingeniero: </p><input id="nombre" type="text" name="" value="JOSÉ CARLOS ROBLES ARECHIGA">
                     <p>Fecha:</p><input id="fecha" type="date" name="">
                     <p>Banco:</p><input id="banco" type="text" name="">
                     <p>Sucursal:</p><input id="sucursal" type="text" name="" >
@@ -32,18 +34,35 @@
                     <p>Hora de inicio rep:</p><input id="horaInicioRep" type="time" name="">
                     <p>Hora termino rep:</p><input id="horaTerminoRep" type="time" name="">
                     <p>Hora de validación Bco:</p><input id="horaValidacionBco" type="time" name="">
-                    <p>Falla Reportada:</p><input id="fallaReportada" type="text" name="">
+                    <p>Falla Reportada:</p><input id="fallaReportada" type="text" name="" value="PUESTA EN SERVICIO">
                     <p>Comentarios:</p><TExtarea id="comentarios"></TExtarea>
-                    <p>Falla encontrada:</p><input id="fallaEncontrada" type="text" name="">
-                    <p>Causa:</p><input id="causa" type="text" name="">
-                    <p>Solución:</p><input id="solucion" type="text" name="">
-                    <p>Codigo de intervencion:</p><input id="codigoIntervencion" type="text" name="">
+                    <p>Falla encontrada:</p><input id="fallaEncontrada" type="text" name="" value="SIN FALLAS">
+                    <p>Causa:</p><input id="causa" type="text" name="" value="457">
+                    <p>Solución:</p><input id="solucion" type="text" name="" value="723">
+                    <p>Codigo de intervencion:</p><input id="codigoIntervencion" type="text" name="" value="PUESTA EN SERVICIO">
                     <p>Valida en linea:</p><input id="validaLinea" type="text" name="">
                     <p>Valida en sitio:</p><input id="validaSitio" type="text" name="">
-                    <p>Aire acondicionado:</p><input id="aireAcondicionado" type="text" name="">
-                    <p>Regulador (Solo remoto):</p><input id="regulador" type="text" name="">
-                    <p>Condiciones fisicas:</p><input id="condiciones" type="text" name="">
-                    <p>Voltajes:</p><input id="voltajes" type="text" name="">
+                    <p>Aire acondicionado:</p><input id="aireAcondicionado" type="text" name="" value="SI">
+                    <p>Regulador (Solo remoto):</p><input id="regulador" type="text" name="" value="SI">
+                    <p>Condiciones fisicas:</p><input id="condiciones" type="text" name="" value="OK">
+
+                    <div class="voltajes">
+                        <p>Voltajes:</p>
+                        <div class="votajesIn">
+                            <p>Voltajes IN</p>
+                            <p>F-T IN:</p><input id="FTI" type="text" name="" value="0.0">
+                            <p>F-N IN:</p><input id="FNI" type="text" name="" value="0.0">
+                            <p>T-N IN:</p><input id="TNI" type="text" name="" value="0.0">
+                        </div>
+                        <div class="votajesOut">
+                            <p>Voltajes OUT</p>
+                            <p>F-T OUT:</p><input id="FTO" type="text" name="" value="0.0">
+                            <p>F-N OUT:</p><input id="FNO" type="text" name="" value="0.0">
+                            <p>T-N OUT:</p><input id="TNO" type="text" name="" value="0.0">
+                        </div>
+                    </div>
+
+
                     <p>N. de parte:</p><input id="numParte" type="text" name="" value="N/A">
                     <p>Descripción de la parte:</p><input id="descripcionParte" type="text" name="" value="N/A">
                     <p>Cantidad:</p><input id="cantidad" type="text" name="" value="N/A">

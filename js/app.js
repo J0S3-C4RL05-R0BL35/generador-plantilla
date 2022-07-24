@@ -6,15 +6,21 @@ const btnCopiar = document.querySelector('.btnCopiar');
 const salidaPlantilla = document.querySelector('.salida-plantilla');
 const formAction = document.querySelector('#form-action');
 const btnLayout = document.querySelector('.btnLayout');
+const btnSalvar = document.querySelector('.btnSalvar');
 
 //EVENTOS
 document.addEventListener('DOMContentLoaded',()=>{
-    
+    addEventListeners();
 })
-btnInst.addEventListener('click',mostrarPlantilla);
-btnGuardar.addEventListener('click',generarLayout);
-btnCopiar.addEventListener('click',copiarLayout);
-btnLayout.addEventListener('click',mostrarLayouts);
+
+function addEventListeners(){
+
+    btnInst.addEventListener('click',mostrarPlantilla);
+    btnGuardar.addEventListener('click',generarLayout);
+    btnCopiar.addEventListener('click',copiarLayout);
+    btnLayout.addEventListener('click',mostrarLayouts);
+    btnSalvar.addEventListener('click',salvarInformacion);
+}
 
 
 //FUNCIONES
@@ -62,7 +68,15 @@ function generarLayout(e){
     const aireAcondicionado = document.querySelector('#aireAcondicionado').value;
     const regulador = document.querySelector('#regulador').value;
     const condiciones = document.querySelector('#condiciones').value;
-    const voltajes = document.querySelector('#voltajes').value;
+    
+    const fti = document.querySelector('#FTI').value;
+    const fni = document.querySelector('#FNI').value;
+    const tni = document.querySelector('#TNI').value;
+    const fto = document.querySelector('#FTO').value;
+    const fno = document.querySelector('#FNO').value;
+    const tno = document.querySelector('#TNO').value;
+
+    
     const numParte = document.querySelector('#numParte').value;
     const descripcionParte = document.querySelector('#descripcionParte').value;
     const cantidad = document.querySelector('#cantidad').value;
@@ -73,37 +87,39 @@ function generarLayout(e){
     const elemento = document.createElement('div');
     // elemento.classList.add('resultado');
     elemento.innerHTML = `
-    <p>INGENIERO: ${nombre}</p>
-    <p>FECHA: ${fecha}</p>
-    <p>BANCO: ${banco}</p>
-    <p>SUCURSAL: ${sucursal}</p>
-    <p>ID: ${id}</p>
-    <p>LLAMADA: ${llamada}</p>
-    <p>TIKET: ${tiket}</p>
-    <p>TAREA: ${tarea}</p>
-    <p>SERIE DEL EQUIPO: ${serieEquipo}</p>
-    <p>MODELO: ${modelo}</p>
-    <p>HORA DE INICIO VIAJE: ${horaInicioViaje}</p>
-    <p>HORA DE LLEGADA: ${horaLlegada}</p>
-    <p>HORA DE INICIO DE REPARACIÓN: ${horaInicioRep}</p>
-    <p>HORA DE TERMINO DE REPARACIÓN: ${horaTerminoRep}</p>
-    <p>HORA DE VALIDACIÓN DE BANCO: ${horaValidacionBco}</p>
-    <p>FALLA REPORTADA: ${fallaReportada}</p>
-    <p>COMENTARIOS: ${comentarios}</p>
-    <p>FALLA ENCONTRADA: ${fallaEncontrada}</p>
-    <p>CAUSA: ${causa}</p>
-    <p>SOLUCIÓN: ${solucion}</p>
-    <p>CODIGO DE INTERVENCIÓN: ${codigoIntervencion}</p>
-    <p>AIRE ACONDICIONADO: ${aireAcondicionado}</p>
-    <p>REGULADOR: ${regulador}</p>
-    <p>CONDICIONES FISICAS: ${condiciones}</p>
-    <p>VOLTAJES: ${voltajes}</p>
-    <p>N. DE PARTE: ${numParte}</p>
-    <p>DESCRIPCIÓN DE LA PARTE: ${descripcionParte}</p>
-    <p>CANTIDAD: ${cantidad}</p>
-    <p>N/S INSTALADA: ${NSInstalada}</p>
-    <p>N/S RETIRADA: ${NSRetirada}</p>
-    <p>KM: ${kilometros}</p>
+    <p>INGENIERO: ${nombre.toUpperCase()}</p>
+    <p>FECHA: ${fecha.toUpperCase()}</p>
+    <p>BANCO: ${banco.toUpperCase()}</p>
+    <p>SUCURSAL: ${sucursal.toUpperCase()}</p>
+    <p>ID: ${id.toUpperCase()}</p>
+    <p>LLAMADA: ${llamada.toUpperCase()}</p>
+    <p>TIKET: ${tiket.toUpperCase()}</p>
+    <p>TAREA: ${tarea.toUpperCase()}</p>
+    <p>SERIE DEL EQUIPO: ${serieEquipo.toUpperCase()}</p>
+    <p>MODELO: ${modelo.toUpperCase()}</p>
+    <p>HORA DE INICIO VIAJE: ${horaInicioViaje.toUpperCase()}</p>
+    <p>HORA DE LLEGADA: ${horaLlegada.toUpperCase()}</p>
+    <p>HORA DE INICIO DE REPARACIÓN: ${horaInicioRep.toUpperCase()}</p>
+    <p>HORA DE TERMINO DE REPARACIÓN: ${horaTerminoRep.toUpperCase()}</p>
+    <p>HORA DE VALIDACIÓN DE BANCO: ${horaValidacionBco.toUpperCase()}</p>
+    <p>FALLA REPORTADA: ${fallaReportada.toUpperCase()}</p>
+    <p>COMENTARIOS: ${comentarios.toUpperCase()}</p>
+    <p>FALLA ENCONTRADA: ${fallaEncontrada.toUpperCase()}</p>
+    <p>CAUSA: ${causa.toUpperCase()}</p>
+    <p>SOLUCIÓN: ${solucion.toUpperCase()}</p>
+    <p>CODIGO DE INTERVENCIÓN: ${codigoIntervencion.toUpperCase()}</p>
+    <p>AIRE ACONDICIONADO: ${aireAcondicionado.toUpperCase()}</p>
+    <p>REGULADOR: ${regulador.toUpperCase()}</p>
+    <p>CONDICIONES FISICAS: ${condiciones.toUpperCase()}</p>
+    <p>VOLTAJES:
+    <p>F-T IN:${fti.toUpperCase()} F-N IN:${fni.toUpperCase()} T-N IN:${tni.toUpperCase()}</p>
+    <p>F-T IN:${fto.toUpperCase()} F-N IN:${fno.toUpperCase()} T-N IN:${tno.toUpperCase()}</p>
+    <p>N. DE PARTE: ${numParte.toUpperCase()}</p>
+    <p>DESCRIPCIÓN DE LA PARTE: ${descripcionParte.toUpperCase()}</p>
+    <p>CANTIDAD: ${cantidad.toUpperCase()}</p>
+    <p>N/S INSTALADA: ${NSInstalada.toUpperCase()}</p>
+    <p>N/S RETIRADA: ${NSRetirada.toUpperCase()}</p>
+    <p>KM: ${kilometros.toUpperCase()}</p>
     `
 ;
     salidaPlantilla.appendChild(elemento);
@@ -130,4 +146,9 @@ function borrarResultado(){
     while(salidaPlantilla.firstChild){
         salidaPlantilla.removeChild(salidaPlantilla.firstChild);
     }
+}
+
+function salvarInformacion(e){
+   e.preventDefault()
+    console.log('Salvando información...')
 }
