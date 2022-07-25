@@ -68,7 +68,7 @@ function generarLayout(e){
     const aireAcondicionado = document.querySelector('#aireAcondicionado').value;
     const regulador = document.querySelector('#regulador').value;
     const condiciones = document.querySelector('#condiciones').value;
-    
+    //Voltajes
     const fti = document.querySelector('#FTI').value;
     const fni = document.querySelector('#FNI').value;
     const tni = document.querySelector('#TNI').value;
