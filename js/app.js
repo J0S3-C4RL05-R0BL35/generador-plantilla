@@ -65,6 +65,8 @@ function generarLayout(e){
     const causa = document.querySelector('#causa').value;
     const solucion = document.querySelector('#solucion').value;
     const codigoIntervencion = document.querySelector('#codigoIntervencion').value;
+    const validaLinea = document.querySelector('#validaLinea').value;
+    const validaSitio = document.querySelector('#validaSitio').value;
     const aireAcondicionado = document.querySelector('#aireAcondicionado').value;
     const regulador = document.querySelector('#regulador').value;
     const condiciones = document.querySelector('#condiciones').value;
@@ -108,6 +110,9 @@ function generarLayout(e){
     <p>CAUSA: ${causa.toUpperCase()}</p>
     <p>SOLUCIÓN: ${solucion.toUpperCase()}</p>
     <p>CODIGO DE INTERVENCIÓN: ${codigoIntervencion.toUpperCase()}</p>
+    <p>VALIDA EN LINEA: ${validaLinea.toUpperCase()}</p>
+    <p>VALIDA EN SITIO: ${validaSitio.toUpperCase()}</p>
+    
     <p>AIRE ACONDICIONADO: ${aireAcondicionado.toUpperCase()}</p>
     <p>REGULADOR: ${regulador.toUpperCase()}</p>
     <p>CONDICIONES FISICAS: ${condiciones.toUpperCase()}</p>
