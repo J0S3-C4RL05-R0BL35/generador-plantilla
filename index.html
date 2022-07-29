@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="José Carlos Robles Arechiga" />
+    <meta name="copyright" content="José Carlos Robles Arechiga" />
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/app.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -19,13 +21,18 @@
             <!-- <a href="#" class="btnSalvar"><img src="./icons/save_FILL0_wght400_GRAD0_opsz48.svg" alt="guardar"></a> -->
             <div class="form-instalaciones">
                 <form action="post" id="form-action">
-                    <p>Ingeniero: </p><input id="nombre" type="text" name="" value="JOSÉ CARLOS ROBLES ARECHIGA">
+                    <p>Ingeniero: </p>
+                    <select id="nombre" name="select">
+                        <option  value="JOSÉ CARLOS ROBLES ARECHIGA">JOSÉ CARLOS ROBLES ARECHIGA</option>
+                        <option  value="TOMAS LOBO INZUNZA">TOMAS LOBO INZUNZA</option>
+
+                    </select>
                     <p>Fecha:</p><input id="fecha" type="date" name="">
                     <p>Banco:</p><input id="banco" type="text" name="">
                     <p>Sucursal:</p><input id="sucursal" type="text" name="" >
                     <p>Id:</p><input id="id" type="text" name="">
                     <p>LLamada:</p><input id="llamada" type="text" name="" value="N/A">
-                    <p>Tiket:</p><input id="tiket" type="text" name="">
+                    <p>Tiket/servicio:</p><input id="tiket" type="text" name="">
                     <p>Tarea:</p><input id="tarea" type="text" name="">
                     <p>Serie del equipo:</p><input id="serieEquipo" type="text" name="">
                     <p>Modelo:</p><input id="modelo" type="text" name="">
