@@ -16,7 +16,7 @@
         <h1 class="titulo">LAYOUT INSTALACIONES</h1>
         <div class="botones">
             <a href="#" class="btnInstalaciones">Instalaciones</a>
-            
+            <a href="#" class="btnCorrectivos">Correctivos</a>
             <div class="formularios" hidden="true">
             <!-- <a href="#" class="btnSalvar"><img src="./icons/save_FILL0_wght400_GRAD0_opsz48.svg" alt="guardar"></a> -->
             <div class="form-instalaciones">
@@ -63,9 +63,9 @@
                         </div>
                         <div class="votajesOut">
                             <p>Voltajes OUT</p>
-                            <p>F-T OUT:</p><input id="FTO" type="text" name="" value="0.0">
-                            <p>F-N OUT:</p><input id="FNO" type="text" name="" value="0.0">
-                            <p>T-N OUT:</p><input id="TNO" type="text" name="" value="0.0">
+                            <p>F-T OUT:</p><input id="FTO" type="text" name="" value="120.0">
+                            <p>F-N OUT:</p><input id="FNO" type="text" name="" value="120.0">
+                            <p>T-N OUT:</p><input id="TNO" type="text" name="" value="0.2">
                         </div>
                     </div>
 
@@ -81,21 +81,88 @@
 
         </div>
 
+        <div class="formularios2" hidden="true">
+            <!-- <a href="#" class="btnSalvar"><img src="./icons/save_FILL0_wght400_GRAD0_opsz48.svg" alt="guardar"></a> -->
+            <div class="form-instalaciones">
+                <form action="post" id="form-action">
+                    <p>Proveedor</p><input id="proveedor2" type="text" name="" >
+                    <p>Tarea/Task/TK:</p><input id="tarea2" type="text" name="">
+                    <p>Tiket/servicio/SR:</p><input id="tiket2" type="text" name="">
+                    <p>Id ATM:</p><input id="id2" type="text" name="">
+                    <p>Nombre del sitio:</p><input id="nombreSitio2" type="text">
+                    <p>Marca y modelo de ATM:</p><input id="marcaModelo2" type="text" name="">
+                    <p>Serie:</p><input id="serieEquipo2" type="text" name="">
+                    <p>Sitio:</p><input id="sitio2" type="text" name="">
+                    <p>Nombre del IDC: </p>
+                    <select id="nombre2" name="select">
+                        <option  value="JOSÉ CARLOS ROBLES ARECHIGA">JOSÉ CARLOS ROBLES ARECHIGA</option>
+                        <option  value="TOMAS LOBO INZUNZA">TOMAS LOBO INZUNZA</option>
+                        <option  value="DANIEL AREVALO GALVAN">DANIEL AREVALO GALVAN</option>
+                        <option  value="DANIEL EDUARDO VALDEZ FELIX">DANIEL EDUARDO VALDEZ FELIX</option>
+                    </select> 
+                    <p>Como encontró el cajero:</p><input value="" id="encontroCajero2" type="text" name="">
+                    <p>Falla reportada:</p><input type="text" name="" id="fallaReportada2">
+                    <p>Código de error:</p><input type="text" name="" id="codigoError2">
+                    <p>Modulo:</p><input type="text" name="" id="modulo2">
+                    <p>Causa:</p><textarea name="" id="causa2" cols="30" rows="5"></textarea>
+                    <p>Solución:</p><textarea name="" id="solucion2" cols="30" rows="5"></textarea>
+                    <p>Pruebas:</p><textarea name="" id="pruebas2" cols="30" rows="5"></textarea>
+                    <p>Como deja el cajero:</p><input value="" id="dejaCajero2" type="text" name="">
+
+                    <div class="voltajes">
+                        <p>Voltajes:</p>
+                        <div class="votajesIn">
+                            <p>Voltajes IN</p>
+                            <p>F-T IN:</p><input id="FTI2" type="text" name="" value="0.0">
+                            <p>F-N IN:</p><input id="FNI2" type="text" name="" value="0.0">
+                            <p>T-N IN:</p><input id="TNI2" type="text" name="" value="0.0">
+                        </div>
+                        <div class="votajesOut">
+                            <p>Voltajes OUT</p>
+                            <p>F-T OUT:</p><input id="FTO2" type="text" name="" value="120.0">
+                            <p>F-N OUT:</p><input id="FNO2" type="text" name="" value="120.0">
+                            <p>T-N OUT:</p><input id="TNO2" type="text" name="" value="0.2">
+                        </div>
+                    </div>
+                    <p>Datos especificos del entorno ajeno al ATM</p><textarea name="" id="datosEntorno2" cols="30" rows="5" >No hay nada en el entono que afecte al ATM</textarea>
+                    <p>Con cargo / Sin cargo</p>
+                    <select id="cargo2" name="select">
+                        <option  value="CON CARGO">CON CARGO</option>
+                        <option  value="SIN CARGO">SIN CARGO</option>
+                    </select> 
+                    <select id="cargoValor2" name="select">
+                        <option  value="**FALLA OPERATIVA**">FALLA OPERATIVA</option>
+                        <option  value="**VANDALISMO**">VANDALISMO</option>
+                        <option  value="**ADECUACIONES**">ADECUACIONES</option>
+                        <option  value="**COMUNICACIONES**">COMUNICACIONES</option>
+                        <option  value="**SOFTWARE**">SOFTWARE</option>
+                        <option  value="**FALLA MECÁNICA**">FALLA MECÁNICA</option>
+                        <option  value="**FALLA POR USUARIO**">FALLA POR USUARIO</option>
+                        <option  value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option>
+                    </select> 
+                    
+                    <p>Partes:</p><input id="partes2" type="text" name="" value="N/A">
+                    <p>Traking en caso de no tenerla en sitio:</p><input id="trakingSitio2" type="text" name="" value="N/A">
+                    <p>Software:</p><input id="software2" type="text" name="" value="N/A">
+                    <p>Fecha de atención:</p><input id="fechaAtencion2" type="date" name="">
+                    <p>Llegada:</p><input id="llegada2" type="time" name="">
+                    <p>Inicio:</p><input id="inicio2" type="time" name="">
+                    <p>Nota:</p><input id="notas2" type="text" name="" value="N/A">
+                    <p>Validación:</p><input id="validacion2" type="time" name="">
+                    <p>Retiro:</p><input id="retiro2" type="time" name="">
+                    <p>VoBo DEL BANCO  (SE):</p><input id="voboBanco2" type="text" name="">
+                    <p>VoBo DEL SITIO Sucursal/ETV:</p><input id="voboSitio2" type="text" name="">
+                    <p>Comentarios adicionales del IDC:</p><textarea name="" id="comentarios2" cols="30" rows="2" value="N/A">N/A</textarea>
+                </form>
+            </div>
+
+        </div>
+
         <!-- <a href="#" class="btnLayout">Plantillas guardadas</a> -->
         <!-- <a href="#" class="btnCorrectivos">Correctivos</a> -->
         <a href="#" class="btnGuardar deshabilitar" >generar layout</a>
         <a href="#" class="btnCopiar deshabilitar">Copiar</a>
     </div>
-    
-        <!-- <div class="form-correctivos">
-            <p>diebold Nixdorf: </p><input type="text" name="" id="">
-            <p>Servicio:</p><input type="text" name="" id="">
-            <p>Tarea:</p><input type="text" name="" id="">
-            <p>Id ATM:</p><input type="text" name="" id="">
-            <p>Nombre del sitio:</p><input type="text" name="" id="">
-            <p>Marca y modelo ATM:</p><input type="text" name="" id="">
-            <p>serie:</p><input type="text" name="" id="">
-        </div> -->
     <div class="salida-plantilla">
     </div>
 </div>
