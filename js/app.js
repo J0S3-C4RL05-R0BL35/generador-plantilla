@@ -259,8 +259,8 @@ function layoutCorrectivos(){
     <p>VALIDACIÓN: ${validacion.toUpperCase()}</p>
     <p>RETIRO: ${retiro.toUpperCase()}</p>
     <p>VoBo DEL BANCO (SE): ${voboBanco.toUpperCase()}</p>
-    <p>VoBo DEL SITIO SUCURSAL/ETV: ${software.toUpperCase()}</p>
-    <p>SOFTWARE versión de aplicativo: ${voboSitio.toUpperCase()}</p>
+    <p>VoBo DEL SITIO SUCURSAL/ETV: ${voboSitio.toUpperCase()}</p>
+    <p>SOFTWARE versión de aplicativo: ${software.toUpperCase()}</p>
     <p>COMENTARIOS ADICIONALES DEL IDC: ${comentarios.toUpperCase()}</p>
     `;
 
