@@ -7,6 +7,8 @@ const salidaPlantilla = document.querySelector('.salida-plantilla');
 const formAction = document.querySelector('#form-action');
 const btnLayout = document.querySelector('.btnLayout');
 const btnSalvar = document.querySelector('.btnSalvar');
+const forms = document.querySelector('#formulario');
+const formInst = document.querySelector('#formulario');
 
 let seleccionado = 0;
 
@@ -36,11 +38,16 @@ function addEventListeners(){
 //MUestra los datos a llenar-modificar por generar el formulario en lugar de solo ocultarlo.
 function mostrarPlantilla(){
     if(seleccionado == 1){
-        const formulario = document.querySelector('.formularios');
-        formulario.removeAttribute('hidden');
+        borrarform();
+        crearFormInst();
+
+        // const formulario = document.querySelector('.formularios');
+        // formulario.removeAttribute('hidden');
     } else if(seleccionado == 2){
-        const formulario = document.querySelector('.formularios2');
-        formulario.removeAttribute('hidden');
+        borrarform();
+        crearFormCorr();
+        // const formulario = document.querySelector('.formularios2');
+        // formulario.removeAttribute('hidden');
     }
     btnGuardar.classList.remove('deshabilitar');
     // btnCor.remove()
@@ -77,12 +84,22 @@ function copiarLayout(e){
         })
     }
 
+function limpiarForm(){
+    formAction.reset();
+}
+
 //Borra en contenido de resultado
 function borrarResultado(){
     while(salidaPlantilla.firstChild){
         salidaPlantilla.removeChild(salidaPlantilla.firstChild);
     }
 }
+function borrarform(){
+    while(formulario.firstChild){
+        formulario.removeChild(formulario.firstChild);
+    }
+}
+
 
 function salvarInformacion(e){
    e.preventDefault()
@@ -176,7 +193,8 @@ function layoutInstalaciones(){
 
     salidaPlantilla.appendChild(elemento);
     btnCopiar.classList.remove('deshabilitar');
-    formAction.reset();
+    //limpiarForm();
+    // formAction.reset();
 }
 
 function layoutCorrectivos(){
@@ -266,5 +284,151 @@ function layoutCorrectivos(){
 
     salidaPlantilla.appendChild(elemento);
     btnCopiar.classList.remove('deshabilitar');
-    formAction.reset();
+}
+function crearFormInst(){
+    const formulario = document.createElement('div');
+    formulario.innerHTML=`
+    <div class="form-instalaciones">
+    <form action="post" id="form-action">
+        <p>Ingeniero: </p>
+        <select id="nombre" name="select">
+            <option  value="JOSÉ CARLOS ROBLES ARECHIGA">JOSÉ CARLOS ROBLES ARECHIGA</option>
+            <option  value="TOMAS LOBO INZUNZA">TOMAS LOBO INZUNZA</option>
+            <option  value="DANIEL AREVALO GALVAN">DANIEL AREVALO GALVAN</option>
+        </select>
+        <p>Fecha:</p><input id="fecha" type="date" name="">
+        <p>Banco:</p><input id="banco" type="text" name="">
+        <p>Sucursal:</p><input id="sucursal" type="text" name="" >
+        <p>Id:</p><input id="id" type="text" name="">
+        <p>LLamada:</p><input id="llamada" type="text" name="" value="N/A">
+        <p>Tiket/servicio:</p><input id="tiket" type="text" name="">
+        <p>Tarea:</p><input id="tarea" type="text" name="">
+        <p>Serie del equipo:</p><input id="serieEquipo" type="text" name="">
+        <p>Modelo:</p><input id="modelo" type="text" name="">
+        <p>Hora inicio viaje:</p><input id="horaInicioViaje" type="time" name="">
+        <p>Hora de llegada:</p><input id="horaLlegada" type="time" name="">
+        <p>Hora de inicio rep:</p><input id="horaInicioRep" type="time" name="">
+        <p>Hora termino rep:</p><input id="horaTerminoRep" type="time" name="">
+        <p>Hora de validación Bco:</p><input id="horaValidacionBco" type="time" name="">
+        <p>Falla Reportada:</p><input id="fallaReportada" type="text" name="" value="PUESTA EN SERVICIO">
+        <p>Comentarios:</p><TExtarea id="comentarios"></TExtarea>
+        <p>Falla encontrada:</p><input id="fallaEncontrada" type="text" name="" value="SIN FALLAS">
+        <p>Causa:</p><input id="causa" type="text" name="" value="457">
+        <p>Solución:</p><input id="solucion" type="text" name="" value="723">
+        <p>Codigo de intervencion:</p><input id="codigoIntervencion" type="text" name="" value="PUESTA EN SERVICIO">
+        <p>Valida en linea:</p><input id="validaLinea" type="text" name="">
+        <p>Valida en sitio:</p><input id="validaSitio" type="text" name="">
+        <p>Aire acondicionado:</p><input id="aireAcondicionado" type="text" name="" value="SI">
+        <p>Regulador (Solo remoto):</p><input id="regulador" type="text" name="" value="SI">
+        <p>Condiciones fisicas:</p><input id="condiciones" type="text" name="" value="OK">
+
+        <div class="voltajes">
+            <p>Voltajes:</p>
+            <div class="votajesIn">
+                <p>Voltajes IN</p>
+                <p>F-T IN:</p><input id="FTI" type="text" name="" value="0.0">
+                <p>F-N IN:</p><input id="FNI" type="text" name="" value="0.0">
+                <p>T-N IN:</p><input id="TNI" type="text" name="" value="0.0">
+            </div>
+            <div class="votajesOut">
+                <p>Voltajes OUT</p>
+                <p>F-T OUT:</p><input id="FTO" type="text" name="" value="120.0">
+                <p>F-N OUT:</p><input id="FNO" type="text" name="" value="120.0">
+                <p>T-N OUT:</p><input id="TNO" type="text" name="" value="0.2">
+            </div>
+        </div>
+
+
+        <p>N. de parte:</p><input id="numParte" type="text" name="" value="N/A">
+        <p>Descripción de la parte:</p><input id="descripcionParte" type="text" name="" value="N/A">
+        <p>Cantidad:</p><input id="cantidad" type="text" name="" value="N/A">
+        <p>N/S instalada:</p><input id="NSInstalada" type="text" name="" value="N/A">
+        <p>N/S retirada:</p><input id="NSRetirada" type="text" name="" value="N/A">
+        <p>Km:</p><input id="kilometros" type="text" name="">
+    </form>
+</div>
+    `;
+
+    forms.appendChild(formulario);
+
+}
+
+function crearFormCorr(){
+    const formulario = document.createElement('div');
+    formulario.innerHTML=`
+    <div class="form-instalaciones">
+                <form action="post" id="form-action">
+                    <p>Proveedor</p><input id="proveedor2" type="text" name="" value="DIEBOLD NIXDORF">
+                    <p>Tarea/Task/TK:</p><input id="tarea2" type="text" name="">
+                    <p>Tiket/servicio/SR:</p><input id="tiket2" type="text" name="">
+                    <p>Id ATM:</p><input id="id2" type="text" name="">
+                    <p>Nombre del sitio:</p><input id="nombreSitio2" type="text">
+                    <p>Marca y modelo de ATM:</p><input id="marcaModelo2" type="text" name="">
+                    <p>Serie:</p><input id="serieEquipo2" type="text" name="">
+                    <p>Sitio:</p><input id="sitio2" type="text" name="">
+                    <p>Nombre del IDC: </p>
+                    <select id="nombre2" name="select">
+                        <option  value="JOSÉ CARLOS ROBLES ARECHIGA">JOSÉ CARLOS ROBLES ARECHIGA</option>
+                        <option  value="TOMAS LOBO INZUNZA">TOMAS LOBO INZUNZA</option>
+                        <option  value="DANIEL AREVALO GALVAN">DANIEL AREVALO GALVAN</option>
+                        <option  value="DANIEL EDUARDO VALDEZ FELIX">DANIEL EDUARDO VALDEZ FELIX</option>
+                    </select> 
+                    <p>Como encontró el cajero:</p><input value="" id="encontroCajero2" type="text" name="">
+                    <p>Falla reportada:</p><input type="text" name="" id="fallaReportada2">
+                    <p>Código de error:</p><input type="text" name="" id="codigoError2">
+                    <p>Modulo:</p><input type="text" name="" id="modulo2">
+                    <p>Causa:</p><textarea name="" id="causa2" cols="30" rows="5"></textarea>
+                    <p>Solución:</p><textarea name="" id="solucion2" cols="30" rows="5"></textarea>
+                    <p>Pruebas:</p><textarea name="" id="pruebas2" cols="30" rows="5"></textarea>
+                    <p>Como deja el cajero:</p><input value="" id="dejaCajero2" type="text" name="">
+
+                    <div class="voltajes">
+                        <p>Voltajes:</p>
+                        <div class="votajesIn">
+                            <p>Voltajes IN</p>
+                            <p>F-T IN:</p><input id="FTI2" type="text" name="" value="0.0">
+                            <p>F-N IN:</p><input id="FNI2" type="text" name="" value="0.0">
+                            <p>T-N IN:</p><input id="TNI2" type="text" name="" value="0.0">
+                        </div>
+                        <div class="votajesOut">
+                            <p>Voltajes OUT</p>
+                            <p>F-T OUT:</p><input id="FTO2" type="text" name="" value="120.0">
+                            <p>F-N OUT:</p><input id="FNO2" type="text" name="" value="120.0">
+                            <p>T-N OUT:</p><input id="TNO2" type="text" name="" value="0.2">
+                        </div>
+                    </div>
+                    <p>Datos especificos del entorno ajeno al ATM</p><textarea name="" id="datosEntorno2" cols="30" rows="5" >No hay nada en el entono que afecte al ATM</textarea>
+                    <p>Con cargo / Sin cargo</p>
+                    <select id="cargo2" name="select">
+                        <option  value="CON CARGO">CON CARGO</option>
+                        <option  value="SIN CARGO">SIN CARGO</option>
+                    </select> 
+                    <select id="cargoValor2" name="select">
+                        <option  value="**FALLA OPERATIVA**">FALLA OPERATIVA</option>
+                        <option  value="**VANDALISMO**">VANDALISMO</option>
+                        <option  value="**ADECUACIONES**">ADECUACIONES</option>
+                        <option  value="**COMUNICACIONES**">COMUNICACIONES</option>
+                        <option  value="**SOFTWARE**">SOFTWARE</option>
+                        <option  value="**FALLA MECÁNICA**">FALLA MECÁNICA</option>
+                        <option  value="**FALLA POR USUARIO**">FALLA POR USUARIO</option>
+                        <option  value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option>
+                        <option value="OTROS">OTROS</option>
+                    </select> 
+                    
+                    <p>Partes:</p><input id="partes2" type="text" name="" value="N/A">
+                    <p>Traking en caso de no tenerla en sitio:</p><input id="trakingSitio2" type="text" name="" value="N/A">
+                    <p>Software:</p><input id="software2" type="text" name="" value="N/A">
+                    <p>Fecha de atención:</p><input id="fechaAtencion2" type="date" name="">
+                    <p>Llegada:</p><input id="llegada2" type="time" name="">
+                    <p>Inicio:</p><input id="inicio2" type="time" name="">
+                    <p>Nota:</p><input id="notas2" type="text" name="" value="N/A">
+                    <p>Validación:</p><input id="validacion2" type="time" name="">
+                    <p>Retiro:</p><input id="retiro2" type="time" name="">
+                    <p>VoBo DEL BANCO  (SE):</p><input id="voboBanco2" type="text" name="">
+                    <p>VoBo DEL SITIO Sucursal/ETV:</p><input id="voboSitio2" type="text" name="">
+                    <p>Comentarios adicionales del IDC:</p><textarea name="" id="comentarios2" cols="30" rows="2" value="N/A">N/A</textarea>
+                </form>
+            </div>
+    `;
+    forms.appendChild(formulario);
 }
