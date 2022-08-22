@@ -1,7 +1,7 @@
 //VARIABLES
 const btnInst = document.querySelector('.btnInstalaciones');
 const btnCor = document.querySelector('.btnCorrectivos');
-const btnGuardar = document.querySelector('.btnGuardar');
+const btnGenerar = document.querySelector('.btnGenerar');
 const btnCopiar = document.querySelector('.btnCopiar');
 const salidaPlantilla = document.querySelector('.salida-plantilla');
 const formAction = document.querySelector('#form-action');
@@ -27,7 +27,7 @@ function addEventListeners(){
         seleccionado = 2;
         mostrarPlantilla();
     });
-    btnGuardar.addEventListener('click',generarLayout);
+    btnGenerar.addEventListener('click',generarLayout);
     btnCopiar.addEventListener('click',copiarLayout);
     btnLayout.addEventListener('click',mostrarLayouts);
     btnSalvar.addEventListener('click',salvarInformacion);
@@ -49,7 +49,8 @@ function mostrarPlantilla(){
         // const formulario = document.querySelector('.formularios2');
         // formulario.removeAttribute('hidden');
     }
-    btnGuardar.classList.remove('deshabilitar');
+    btnGenerar.classList.remove('deshabilitar');
+    //btnGuardar.classList.remove('deshabilitar');
     // btnCor.remove()
 }
 
@@ -229,6 +230,7 @@ function layoutCorrectivos(){
     const datosEntorno = document.querySelector('#datosEntorno2').value;
     const cargo = document.querySelector('#cargo2').value;
     const cargoValor = document.querySelector('#cargoValor2').value;
+    const otroCargo = document.querySelector('#otroCargo').value;
     
     const parte = document.querySelector('#partes2').value;
     const trakingSitio = document.querySelector('#trakingSitio2').value;
@@ -267,7 +269,7 @@ function layoutCorrectivos(){
     <p>F-T IN:${fti.toUpperCase()} F-N IN:${fni.toUpperCase()} T-N IN:${tni.toUpperCase()}</p>
     <p>F-T IN:${fto.toUpperCase()} F-N IN:${fno.toUpperCase()} T-N IN:${tno.toUpperCase()}</p>
     <p>DATOS ESPECÍFICOS DEL ENTORNO AJENO AL ATM: ${datosEntorno.toUpperCase()}</p>
-    <p>CON CARGO O SIN CARGO: ${cargo.toUpperCase()}${cargoValor.toUpperCase()}</p>
+    <p>CON CARGO O SIN CARGO: **${cargos(cargo, cargoValor, otroCargo)}**</p>
     <p>PARTES: ${parte.toUpperCase()}</p>
     <p>TRAKING EN CASO DE NO TENERLO EN SITIO: ${trakingSitio.toUpperCase()}</p>
     <p>FECHA DE ATENCIÓN: ${fechaAtencion.toUpperCase()}</p>
@@ -414,6 +416,7 @@ function crearFormCorr(){
                         <option  value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option>
                         <option value="OTROS">OTROS</option>
                     </select> 
+                    <p>Otros: </p><input id="otroCargo" type="text" name="">
                     
                     <p>Partes:</p><input id="partes2" type="text" name="" value="N/A">
                     <p>Traking en caso de no tenerla en sitio:</p><input id="trakingSitio2" type="text" name="" value="N/A">
@@ -431,4 +434,13 @@ function crearFormCorr(){
             </div>
     `;
     forms.appendChild(formulario);
+}
+
+function cargos(cargo, cargoValor,otroCargo){
+    if (cargoValor != 'OTROS'){
+        return `${cargo.toUpperCase()}/${cargoValor.toUpperCase()}`;
+    }else{
+        return `${cargo.toUpperCase()}/${otroCargo.toUpperCase()}`;
+    }
+    
 }
