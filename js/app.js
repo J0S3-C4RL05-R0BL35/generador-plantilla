@@ -10,10 +10,16 @@ const btnSalvar = document.querySelector('.btnSalvar');
 const forms = document.querySelector('#formulario');
 const formInst = document.querySelector('#formulario');
 
+
+
+let nombreIDC = localStorage.getItem('nombreIDC');
 let seleccionado = 0;
 
 //EVENTOS
 document.addEventListener('DOMContentLoaded',()=>{
+    if(!nombreIDC){
+        preguntaNombre();
+    }
     addEventListeners();
 })
 
@@ -293,11 +299,7 @@ function crearFormInst(){
     <div class="form-instalaciones">
     <form action="post" id="form-action">
         <p>Ingeniero: </p>
-        <select id="nombre" name="select">
-            <option  value="JOSÉ CARLOS ROBLES ARECHIGA">JOSÉ CARLOS ROBLES ARECHIGA</option>
-            <option  value="TOMAS LOBO INZUNZA">TOMAS LOBO INZUNZA</option>
-            <option  value="DANIEL AREVALO GALVAN">DANIEL AREVALO GALVAN</option>
-        </select>
+        <input id="nombre" type="text" name="" value="${nombreIDC}">
         <p>Fecha:</p><input id="fecha" type="date" name="">
         <p>Banco:</p><input id="banco" type="text" name="">
         <p>Sucursal:</p><input id="sucursal" type="text" name="" >
@@ -369,12 +371,7 @@ function crearFormCorr(){
                     <p>Serie:</p><input id="serieEquipo2" type="text" name="">
                     <p>Sitio:</p><input id="sitio2" type="text" name="">
                     <p>Nombre del IDC: </p>
-                    <select id="nombre2" name="select">
-                        <option  value="JOSÉ CARLOS ROBLES ARECHIGA">JOSÉ CARLOS ROBLES ARECHIGA</option>
-                        <option  value="TOMAS LOBO INZUNZA">TOMAS LOBO INZUNZA</option>
-                        <option  value="DANIEL AREVALO GALVAN">DANIEL AREVALO GALVAN</option>
-                        <option  value="DANIEL EDUARDO VALDEZ FELIX">DANIEL EDUARDO VALDEZ FELIX</option>
-                    </select> 
+                    <input id="nombre2" type="text" name="" value="${nombreIDC}">
                     <p>Como encontró el cajero:</p><input value="" id="encontroCajero2" type="text" name="">
                     <p>Falla reportada:</p><input type="text" name="" id="fallaReportada2">
                     <p>Código de error:</p><input type="text" name="" id="codigoError2">
@@ -443,4 +440,10 @@ function cargos(cargo, cargoValor,otroCargo){
         return `${cargo.toUpperCase()}/${otroCargo.toUpperCase()}`;
     }
     
+}
+
+function preguntaNombre(){
+    alert('NO SE DETECTO NOMBRE DE IDC');
+    nombreIDC = prompt('Ingresa nombre IDC:');
+    localStorage.setItem('nombreIDC',nombreIDC);
 }
