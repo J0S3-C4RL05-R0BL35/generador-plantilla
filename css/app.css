@@ -36,6 +36,16 @@ a{
     margin: 10px;
     padding: 15px;
 }
+.btnLimpiar{
+    font-size:large;
+    text-align: center;
+    display: block;
+    background-color: rgb(128, 17, 0);
+    color: white;
+    text-decoration: none;
+    margin: 10px;
+    padding: 15px;
+}
 /*FORMULARIOS*/
 .formularios, .formularios2{
     padding: 20px;

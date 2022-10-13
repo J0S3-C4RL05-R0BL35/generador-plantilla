@@ -3,6 +3,7 @@ const btnInst = document.querySelector('.btnInstalaciones');
 const btnCor = document.querySelector('.btnCorrectivos');
 const btnGenerar = document.querySelector('.btnGenerar');
 const btnCopiar = document.querySelector('.btnCopiar');
+const btnLimpiar = document.querySelector('.btnLimpiar');
 const salidaPlantilla = document.querySelector('.salida-plantilla');
 const formAction = document.querySelector('#form-action');
 const btnLayout = document.querySelector('.btnLayout');
@@ -12,15 +13,62 @@ const formInst = document.querySelector('#formulario');
 
 
 
+
+
 let nombreIDC = localStorage.getItem('nombreIDC');
+let infoJson;
+let infoInst = {
+    nombre:'',
+    fecha:'',
+    banco:'',
+    sucursal:'',
+    id:'',
+    llamada:'',
+    tiket:'',
+    tarea:'',
+    serieEquipo:'',
+    modelo:'',
+    horaInicioViaje:'',
+    horaLlegada:'',
+    horaInicioRep:'',
+    horaTerminoRep:'',
+    horaValidacionBco:'',
+    fallaReportada:'PUESTA EN SERVICIO',
+    comentarios:'',
+    causa:'457',
+    solucion:'723',
+    codigoIntervencion:'PUESTA EN SERVICIO',
+    validaLinea:'',
+    validaSitio:'',
+    aireAcondicionado:'SI',
+    regulador:'SI',
+    condiciones:'OK',
+    fallaEncontrada:'SIN FALLAS',
+    fti:'0.0',
+    fni:'0.0',
+    tni:'0.0',
+    fto:'120.0',
+    fno:'120.0',
+    tno:'0.2',
+    numParte:'N/A',
+    descripcionParte:'N/A',
+    cantidad:'N/A',
+    NSInstalada:'N/A',
+    NSRetirada:'N/A',
+    kilometros:''
+};
+
+infoInst.banco;
 let seleccionado = 0;
 
 //EVENTOS
 document.addEventListener('DOMContentLoaded',()=>{
+    //Recupera la info de local
+    retornarInfo()
     if(!nombreIDC){
         preguntaNombre();
     }
-    addEventListeners();
+    addEventListeners();    
 })
 
 function addEventListeners(){
@@ -36,8 +84,15 @@ function addEventListeners(){
     btnGenerar.addEventListener('click',generarLayout);
     btnCopiar.addEventListener('click',copiarLayout);
     btnLayout.addEventListener('click',mostrarLayouts);
-    btnSalvar.addEventListener('click',salvarInformacion);
+    btnSalvar.addEventListener('click',salvarInformacion);  
 }
+
+
+btnLimpiar.addEventListener('click',()=>{
+    //e.preventDefault();
+    localStorage.removeItem('info');
+    location.reload();
+});
 
 
 //FUNCIONES
@@ -158,6 +213,7 @@ function layoutInstalaciones(){
     const kilometros = document.querySelector('#kilometros').value;
     
     const elemento = document.createElement('div');
+
     // elemento.classList.add('resultado');
     elemento.innerHTML = `
     <p>INGENIERO: ${nombre.toUpperCase()}</p>
@@ -299,62 +355,62 @@ function crearFormInst(){
     <div class="form-instalaciones">
     <form action="post" id="form-action">
         <p>Ingeniero: </p>
-        <input id="nombre" type="text" name="" value="${nombreIDC}">
-        <p>Fecha:</p><input id="fecha" type="date" name="">
-        <p>Banco:</p><input id="banco" type="text" name="">
-        <p>Sucursal:</p><input id="sucursal" type="text" name="" >
-        <p>Id:</p><input id="id" type="text" name="">
-        <p>LLamada:</p><input id="llamada" type="text" name="" value="N/A">
-        <p>Tiket/servicio:</p><input id="tiket" type="text" name="">
-        <p>Tarea:</p><input id="tarea" type="text" name="">
-        <p>Serie del equipo:</p><input id="serieEquipo" type="text" name="">
-        <p>Modelo:</p><input id="modelo" type="text" name="">
-        <p>Hora inicio viaje:</p><input id="horaInicioViaje" type="time" name="">
-        <p>Hora de llegada:</p><input id="horaLlegada" type="time" name="">
-        <p>Hora de inicio rep:</p><input id="horaInicioRep" type="time" name="">
-        <p>Hora termino rep:</p><input id="horaTerminoRep" type="time" name="">
-        <p>Hora de validación Bco:</p><input id="horaValidacionBco" type="time" name="">
-        <p>Falla Reportada:</p><input id="fallaReportada" type="text" name="" value="PUESTA EN SERVICIO">
-        <p>Comentarios:</p><TExtarea id="comentarios"></TExtarea>
-        <p>Falla encontrada:</p><input id="fallaEncontrada" type="text" name="" value="SIN FALLAS">
-        <p>Causa:</p><input id="causa" type="text" name="" value="457">
-        <p>Solución:</p><input id="solucion" type="text" name="" value="723">
-        <p>Codigo de intervencion:</p><input id="codigoIntervencion" type="text" name="" value="PUESTA EN SERVICIO">
-        <p>Valida en linea:</p><input id="validaLinea" type="text" name="">
-        <p>Valida en sitio:</p><input id="validaSitio" type="text" name="">
-        <p>Aire acondicionado:</p><input id="aireAcondicionado" type="text" name="" value="SI">
-        <p>Regulador (Solo remoto):</p><input id="regulador" type="text" name="" value="SI">
-        <p>Condiciones fisicas:</p><input id="condiciones" type="text" name="" value="OK">
+        <input id="nombre" type="text" name="" value="${nombreIDC}" class="guardar">
+        <p>Fecha:</p><input id="fecha" type="date" name="" class="guardar" value="${infoInst.fecha}">
+        <p>Banco:</p><input id="banco" type="text" name="" value="${infoInst.banco}" class="guardar">
+        <p>Sucursal:</p><input id="sucursal" type="text" name="" value="${infoInst.sucursal}" class="guardar">
+        <p>Id:</p><input id="id" type="text" name="" value="${infoInst.id}" class="guardar">
+        <p>LLamada:</p><input id="llamada" type="text" name="" value="N/A" class="guardar">
+        <p>Tiket/servicio:</p><input id="tiket" type="text" name="" value="${infoInst.tiket}" class="guardar">
+        <p>Tarea:</p><input id="tarea" type="text" name="" value="${infoInst.tarea}" class="guardar">
+        <p>Serie del equipo:</p><input id="serieEquipo" type="text" name="" value="${infoInst.serieEquipo}" class="guardar">
+        <p>Modelo:</p><input id="modelo" type="text" name="" value="${infoInst.modelo}" class="guardar">
+        <p>Hora inicio viaje:</p><input id="horaInicioViaje" type="time" name="" class="guardar" value="${infoInst.horaInicioViaje}">
+        <p>Hora de llegada:</p><input id="horaLlegada" type="time" name="" class="guardar"value="${infoInst.horaLlegada}">
+        <p>Hora de inicio rep:</p><input id="horaInicioRep" type="time" name="" class="guardar"value="${infoInst.horaInicioRep}">
+        <p>Hora termino rep:</p><input id="horaTerminoRep" type="time" name="" class="guardar"value="${infoInst.horaTerminoRep}">
+        <p>Hora de validación Bco:</p><input id="horaValidacionBco" type="time" name="" class="guardar"value="${infoInst.horaValidacionBco}">
+        <p>Falla Reportada:</p><input id="fallaReportada" type="text" name="" value="${infoInst.fallaReportada}" class="guardar"}">
+        <p>Comentarios:</p><TExtarea id="comentarios" class="guardar">${infoInst.comentarios}</TExtarea>
+        <p>Falla encontrada:</p><input id="fallaEncontrada" type="text" name="" value="${infoInst.fallaEncontrada}" class="guardar"}">
+        <p>Causa:</p><input id="causa" type="text" name="" class="guardar"value="${infoInst.causa}">
+        <p>Solución:</p><input id="solucion" type="text" name="" class="guardar"value="${infoInst.solucion}">
+        <p>Codigo de intervencion:</p><input id="codigoIntervencion" type="text" name="" value="${infoInst.codigoIntervencion}" class="guardar"">
+        <p>Valida en linea:</p><input id="validaLinea" type="text" name="" class="guardar"value="${infoInst.validaLinea}">
+        <p>Valida en sitio:</p><input id="validaSitio" type="text" name="" class="guardar"value="${infoInst.validaSitio}">
+        <p>Aire acondicionado:</p><input id="aireAcondicionado" type="text" name="" value="${infoInst.aireAcondicionado}" class="guardar">
+        <p>Regulador (Solo remoto):</p><input id="regulador" type="text" name="" value="${infoInst.regulador}" class="guardar">
+        <p>Condiciones fisicas:</p><input id="condiciones" type="text" name="" value="${infoInst.condiciones}" class="guardar">
 
         <div class="voltajes">
             <p>Voltajes:</p>
             <div class="votajesIn">
                 <p>Voltajes IN</p>
-                <p>F-T IN:</p><input id="FTI" type="text" name="" value="0.0">
-                <p>F-N IN:</p><input id="FNI" type="text" name="" value="0.0">
-                <p>T-N IN:</p><input id="TNI" type="text" name="" value="0.0">
+                <p>F-T IN:</p><input id="FTI" type="text" name="" value="${infoInst.fti}" class="guardar">
+                <p>F-N IN:</p><input id="FNI" type="text" name="" value="${infoInst.fni}" class="guardar">
+                <p>T-N IN:</p><input id="TNI" type="text" name="" value="${infoInst.tni}" class="guardar">
             </div>
             <div class="votajesOut">
                 <p>Voltajes OUT</p>
-                <p>F-T OUT:</p><input id="FTO" type="text" name="" value="120.0">
-                <p>F-N OUT:</p><input id="FNO" type="text" name="" value="120.0">
-                <p>T-N OUT:</p><input id="TNO" type="text" name="" value="0.2">
+                <p>F-T OUT:</p><input id="FTO" type="text" name="" value="${infoInst.fto}" class="guardar">
+                <p>F-N OUT:</p><input id="FNO" type="text" name="" value="${infoInst.fno}" class="guardar">
+                <p>T-N OUT:</p><input id="TNO" type="text" name="" value="${infoInst.tno}" class="guardar">
             </div>
         </div>
 
 
-        <p>N. de parte:</p><input id="numParte" type="text" name="" value="N/A">
-        <p>Descripción de la parte:</p><input id="descripcionParte" type="text" name="" value="N/A">
-        <p>Cantidad:</p><input id="cantidad" type="text" name="" value="N/A">
-        <p>N/S instalada:</p><input id="NSInstalada" type="text" name="" value="N/A">
-        <p>N/S retirada:</p><input id="NSRetirada" type="text" name="" value="N/A">
-        <p>Km:</p><input id="kilometros" type="text" name="">
+        <p>N. de parte:</p><input id="numParte" type="text" name="" value="${infoInst.numParte}" class="guardar">
+        <p>Descripción de la parte:</p><input id="descripcionParte" type="text" name="" value="${infoInst.descripcionParte}" class="guardar">
+        <p>Cantidad:</p><input id="cantidad" type="text" name="" value="${infoInst.cantidad}" class="guardar">
+        <p>N/S instalada:</p><input id="NSInstalada" type="text" name="" value="${infoInst.NSInstalada}" class="guardar">
+        <p>N/S retirada:</p><input id="NSRetirada" type="text" name="" value="${infoInst.NSRetirada}" class="guardar">
+        <p>Km:</p><input id="kilometros" type="text" name="" class="guardar" value="${infoInst.kilometros}">
     </form>
 </div>
     `;
 
     forms.appendChild(formulario);
-
+    guardarEstado();
 }
 
 function crearFormCorr(){
@@ -442,8 +498,122 @@ function cargos(cargo, cargoValor,otroCargo){
     
 }
 
+
 function preguntaNombre(){
     alert('NO SE DETECTO NOMBRE DE IDC');
     nombreIDC = prompt('Ingresa nombre IDC:');
     localStorage.setItem('nombreIDC',nombreIDC);
+}
+
+//Permite guardar estado al salir de cada formulario
+function guardarEstado(){
+    const guardar = document.querySelectorAll('.guardar');
+    console.log(guardar);
+
+    for (let index = 0; index < guardar.length; index++) {
+        guardar[index].addEventListener('blur',()=>{
+
+            //Ejecuta la acción que guarda el estado
+            guardandoLocal();
+        });
+    }
+}
+
+//Guarda la información en un objeto al ser invocado por el blur
+function guardandoLocal(){
+    infoInst.nombre = document.querySelector('#nombre').value;
+    infoInst.fecha = document.querySelector('#fecha').value;
+    infoInst.banco = document.querySelector('#banco').value;
+    infoInst.sucursal = document.querySelector('#sucursal').value;
+    infoInst.id = document.querySelector('#id').value;
+    infoInst.llamada = document.querySelector('#llamada').value;
+    infoInst.tiket = document.querySelector('#tiket').value;
+    infoInst.tarea = document.querySelector('#tarea').value;
+    infoInst.serieEquipo = document.querySelector('#serieEquipo').value;
+    infoInst.modelo = document.querySelector('#modelo').value;
+    infoInst.horaInicioViaje =document.querySelector('#horaInicioViaje').value;
+    infoInst.horaLlegada = document.querySelector('#horaLlegada').value;
+    infoInst.horaInicioRep = document.querySelector('#horaInicioRep').value;
+    infoInst.horaTerminoRep = document.querySelector('#horaTerminoRep').value;
+    infoInst.horaValidacionBco = document.querySelector('#horaValidacionBco').value;
+    infoInst.fallaReportada = document.querySelector('#fallaReportada').value;
+    infoInst.comentarios = document.querySelector('#comentarios').value;
+    infoInst.fallaEncontrada = document.querySelector('#fallaEncontrada').value;
+    infoInst.causa = document.querySelector('#causa').value;
+    infoInst.solucion = document.querySelector('#solucion').value;
+    infoInst.codigoIntervencion = document.querySelector('#codigoIntervencion').value;
+    infoInst.validaLinea = document.querySelector('#validaLinea').value;
+    infoInst.validaSitio = document.querySelector('#validaSitio').value;
+    infoInst.aireAcondicionado = document.querySelector('#aireAcondicionado').value;
+    infoInst.regulador = document.querySelector('#regulador').value;
+    infoInst.condiciones = document.querySelector('#condiciones').value;
+    //Voltajes
+    infoInst.fti = document.querySelector('#FTI').value;
+    infoInst.fni = document.querySelector('#FNI').value;
+    infoInst.tni = document.querySelector('#TNI').value;
+    infoInst.fto = document.querySelector('#FTO').value;
+    infoInst.fno = document.querySelector('#FNO').value;
+    infoInst.tno = document.querySelector('#TNO').value;
+
+    
+    infoInst.numParte = document.querySelector('#numParte').value;
+    infoInst.descripcionParte = document.querySelector('#descripcionParte').value;
+    infoInst.cantidad = document.querySelector('#cantidad').value;
+    infoInst.NSInstalada = document.querySelector('#NSInstalada').value;
+    infoInst.NSRetirada = document.querySelector('#NSRetirada').value;
+    infoInst.kilometros = document.querySelector('#kilometros').value;
+    console.log(infoInst);
+
+    //transformar en texto para guardarlo en local
+    infoString = JSON.stringify(infoInst);
+
+    console.log(infoString);
+    //guardar en local
+    localStorage.setItem('info',infoString);
+}
+//Recuper la info de local
+function retornarInfo(){
+    const infoRetorno = localStorage.getItem('info');
+    infoJson = JSON.parse(infoRetorno);
+    if(infoJson){
+        infoInst.nombre = infoJson.nombre;
+    infoInst.fecha = infoJson.fecha;
+    infoInst.banco = infoJson.banco;
+    infoInst.sucursal = infoJson.sucursal;
+    infoInst.id = infoJson.id;
+    infoInst.llamada = infoJson.llamada;
+    infoInst.tiket = infoJson.tiket;
+    infoInst.tarea = infoJson.tarea;
+    infoInst.serieEquipo = infoJson.serieEquipo;
+    infoInst.modelo = infoJson.modelo;
+    infoInst.horaInicioViaje = infoJson.horaInicioViaje
+    infoInst.horaLlegada = infoJson.horaLlegada;
+    infoInst.horaInicioRep = infoJson.horaInicioRep;
+    infoInst.horaTerminoRep = infoJson.horaInicioRep;
+    infoInst.horaValidacionBco = infoJson.horaValidacionBco;
+    infoInst.fallaReportada = infoJson.fallaReportada;
+    infoInst.comentarios = infoJson.comentarios;
+    infoInst.causa = infoJson.causa;
+    infoInst.solucion = infoJson.solucion
+    infoInst.codigoIntervencion = infoJson.codigoIntervencion;
+    infoInst.validaLinea = infoJson.validaLinea;
+    infoInst.validaSitio = infoJson.validaSitio;
+    infoInst.aireAcondicionado = infoJson.aireAcondicionado;
+    infoInst.regulador = infoJson.regulador;
+    infoInst.condiciones = infoJson.condiciones;
+    infoInst.fallaEncontrada = infoJson.fallaEncontrada;
+    infoInst.fti = infoJson.fti;
+    infoInst.fni = infoJson.fni;
+    infoInst.tni = infoJson.tni;
+    infoInst.fto = infoJson.fto;
+    infoInst.fno = infoJson.fno;
+    infoInst.tno = infoJson.tno;
+    infoInst.numParte = infoJson.numParte;
+    infoInst.descripcionParte = infoJson.descripcionParte;
+    infoInst.cantidad = infoJson.cantidad;
+    infoInst.NSInstalada = infoJson.NSInstalada;
+    infoInst.NSRetirada = infoJson.NSRetirada;
+    infoInst.kilometros = infoJson.kilometros;
+    }
+    
 }
