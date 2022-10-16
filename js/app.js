@@ -17,13 +17,18 @@ const formInst = document.querySelector('#formulario');
 
 let nombreIDC = localStorage.getItem('nombreIDC');
 let infoJson;
+
+
+let infoJson2;
+
+
 let infoInst = {
     nombre:'',
-    fecha:'',
+    fecha:'10-10-2022',
     banco:'',
     sucursal:'',
     id:'',
-    llamada:'',
+    llamada:'N/A',
     tiket:'',
     tarea:'',
     serieEquipo:'',
@@ -58,13 +63,55 @@ let infoInst = {
     kilometros:''
 };
 
-infoInst.banco;
+let corrInfo = {
+    proveedor:'DIEBOLD NIXDORF',
+    tarea:'',
+    tiket:'',
+    id:'',
+    nombreSitio:'',
+    marcaModelo:'',
+    serie:'',
+    sitio:'',
+    nombre:'',
+    encontroCajero:'',
+    fallaReportada:'',
+    codigoError:'',
+    modulo:'',
+    causa:'',
+    solucion:'',
+    pruebas:'',
+    comoDejaCajero:'',
+    fti:'0.0',
+    fni:'0.0',
+    tni:'0.0',
+    fto:'120.0',
+    fno:'120.0',
+    tno:'0.2',
+    datosEntorno:'No hay nada en el entono que afecte al ATM',
+    //con cargo sin cargo
+    //valor del cargo
+    otroCargo:'',
+    partes:'N/A',
+    trakingSitio:'N/A',
+    software:'N/A',
+    fecha:'',
+    llegada:'',
+    inicio:'',
+    notas:'N/A',
+    validacion:'',
+    retiro:'',
+    voboBanco:'',
+    voboSitio:'',
+    comentarios:'N/A'
+};
+
+//infoInst.banco;
 let seleccionado = 0;
 
 //EVENTOS
 document.addEventListener('DOMContentLoaded',()=>{
     //Recupera la info de local
-    retornarInfo()
+    retornarInfo();
     if(!nombreIDC){
         preguntaNombre();
     }
@@ -90,7 +137,8 @@ function addEventListeners(){
 
 btnLimpiar.addEventListener('click',()=>{
     //e.preventDefault();
-    localStorage.removeItem('info');
+    localStorage.removeItem('infoInstalaciones');
+    localStorage.removeItem('infoCorrectivos');
     location.reload();
 });
 
@@ -360,7 +408,7 @@ function crearFormInst(){
         <p>Banco:</p><input id="banco" type="text" name="" value="${infoInst.banco}" class="guardar">
         <p>Sucursal:</p><input id="sucursal" type="text" name="" value="${infoInst.sucursal}" class="guardar">
         <p>Id:</p><input id="id" type="text" name="" value="${infoInst.id}" class="guardar">
-        <p>LLamada:</p><input id="llamada" type="text" name="" value="N/A" class="guardar">
+        <p>LLamada:</p><input id="llamada" type="text" name="" value="${infoInst.llamada}" class="guardar">
         <p>Tiket/servicio:</p><input id="tiket" type="text" name="" value="${infoInst.tiket}" class="guardar">
         <p>Tarea:</p><input id="tarea" type="text" name="" value="${infoInst.tarea}" class="guardar">
         <p>Serie del equipo:</p><input id="serieEquipo" type="text" name="" value="${infoInst.serieEquipo}" class="guardar">
@@ -418,75 +466,76 @@ function crearFormCorr(){
     formulario.innerHTML=`
     <div class="form-instalaciones">
                 <form action="post" id="form-action">
-                    <p>Proveedor</p><input id="proveedor2" type="text" name="" value="DIEBOLD NIXDORF">
-                    <p>Tarea/Task/TK:</p><input id="tarea2" type="text" name="">
-                    <p>Tiket/servicio/SR:</p><input id="tiket2" type="text" name="">
-                    <p>Id ATM:</p><input id="id2" type="text" name="">
-                    <p>Nombre del sitio:</p><input id="nombreSitio2" type="text">
-                    <p>Marca y modelo de ATM:</p><input id="marcaModelo2" type="text" name="">
-                    <p>Serie:</p><input id="serieEquipo2" type="text" name="">
-                    <p>Sitio:</p><input id="sitio2" type="text" name="">
+                    <p>Proveedor</p><input id="proveedor2" type="text" name="" class="guardar" value="${corrInfo.proveedor}">
+                    <p>Tarea/Task/TK:</p><input id="tarea2" type="text" name="" class="guardar" value=${corrInfo.tarea}>
+                    <p>Tiket/servicio/SR:</p><input id="tiket2" type="text" name="" class="guardar" value="${corrInfo.tiket}">
+                    <p>Id ATM:</p><input id="id2" type="text" name="" class="guardar" value="${corrInfo.id}">
+                    <p>Nombre del sitio:</p><input id="nombreSitio2" type="text" class="guardar" value="${corrInfo.nombreSitio}">
+                    <p>Marca y modelo de ATM:</p><input id="marcaModelo2" type="text" name="" class="guardar" value="${corrInfo.marcaModelo}">
+                    <p>Serie:</p><input id="serieEquipo2" type="text" name="" class="guardar" value="${corrInfo.serie}">
+                    <p>Sitio:</p><input id="sitio2" type="text" name="" class="guardar" value="${corrInfo.sitio}">
                     <p>Nombre del IDC: </p>
-                    <input id="nombre2" type="text" name="" value="${nombreIDC}">
-                    <p>Como encontró el cajero:</p><input value="" id="encontroCajero2" type="text" name="">
-                    <p>Falla reportada:</p><input type="text" name="" id="fallaReportada2">
-                    <p>Código de error:</p><input type="text" name="" id="codigoError2">
-                    <p>Modulo:</p><input type="text" name="" id="modulo2">
-                    <p>Causa:</p><textarea name="" id="causa2" cols="30" rows="5"></textarea>
-                    <p>Solución:</p><textarea name="" id="solucion2" cols="30" rows="5"></textarea>
-                    <p>Pruebas:</p><textarea name="" id="pruebas2" cols="30" rows="5"></textarea>
-                    <p>Como deja el cajero:</p><input value="" id="dejaCajero2" type="text" name="">
+                    <input id="nombre2" type="text" name="" class="guardar" value="${nombreIDC}">
+                    <p>Como encontró el cajero:</p><input class="guardar" value="${corrInfo.encontroCajero}" id="encontroCajero2" type="text" name="">
+                    <p>Falla reportada:</p><input type="text" name="" id="fallaReportada2" class="guardar" value="${corrInfo.fallaReportada}">
+                    <p>Código de error:</p><input type="text" name="" id="codigoError2" class="guardar" value="${corrInfo.codigoError}">
+                    <p>Modulo:</p><input type="text" name="" id="modulo2" class="guardar" value="${corrInfo.modulo}">
+                    <p>Causa:</p><textarea name="" id="causa2" cols="30"class="guardar"  rows="5">${corrInfo.causa}</textarea>
+                    <p>Solución:</p><textarea name="" id="solucion2" cols="30" class="guardar" rows="5">${corrInfo.solucion}</textarea>
+                    <p>Pruebas:</p><textarea name="" id="pruebas2" cols="30" class="guardar" rows="5">${corrInfo.pruebas}</textarea>
+                    <p>Como deja el cajero:</p><input id="dejaCajero2" type="text" name="" class="guardar" value="${corrInfo.comoDejaCajero}">
 
                     <div class="voltajes">
                         <p>Voltajes:</p>
                         <div class="votajesIn">
                             <p>Voltajes IN</p>
-                            <p>F-T IN:</p><input id="FTI2" type="text" name="" value="0.0">
-                            <p>F-N IN:</p><input id="FNI2" type="text" name="" value="0.0">
-                            <p>T-N IN:</p><input id="TNI2" type="text" name="" value="0.0">
+                            <p>F-T IN:</p><input id="FTI2" type="text" name="" class="guardar" value="${corrInfo.fti}">
+                            <p>F-N IN:</p><input id="FNI2" type="text" name="" class="guardar" value="${corrInfo.fni}">
+                            <p>T-N IN:</p><input id="TNI2" type="text" name="" class="guardar" value="${corrInfo.tni}">
                         </div>
                         <div class="votajesOut">
                             <p>Voltajes OUT</p>
-                            <p>F-T OUT:</p><input id="FTO2" type="text" name="" value="120.0">
-                            <p>F-N OUT:</p><input id="FNO2" type="text" name="" value="120.0">
-                            <p>T-N OUT:</p><input id="TNO2" type="text" name="" value="0.2">
+                            <p>F-T OUT:</p><input id="FTO2" type="text" name="" class="guardar" value="${corrInfo.fto}">
+                            <p>F-N OUT:</p><input id="FNO2" type="text" name="" class="guardar" value="${corrInfo.fno}">
+                            <p>T-N OUT:</p><input id="TNO2" type="text" name="" class="guardar" value="${corrInfo.tno}">
                         </div>
                     </div>
-                    <p>Datos especificos del entorno ajeno al ATM</p><textarea name="" id="datosEntorno2" cols="30" rows="5" >No hay nada en el entono que afecte al ATM</textarea>
+                    <p>Datos especificos del entorno ajeno al ATM</p><textarea name="" class="guardar" id="datosEntorno2" cols="30" rows="5" >${corrInfo.datosEntorno}</textarea>
                     <p>Con cargo / Sin cargo</p>
                     <select id="cargo2" name="select">
-                        <option  value="CON CARGO">CON CARGO</option>
-                        <option  value="SIN CARGO">SIN CARGO</option>
+                        <option  class="guardar" value="CON CARGO">CON CARGO</option>
+                        <option  class="guardar" value="SIN CARGO">SIN CARGO</option>
                     </select> 
                     <select id="cargoValor2" name="select">
-                        <option  value="**FALLA OPERATIVA**">FALLA OPERATIVA</option>
-                        <option  value="**VANDALISMO**">VANDALISMO</option>
-                        <option  value="**ADECUACIONES**">ADECUACIONES</option>
-                        <option  value="**COMUNICACIONES**">COMUNICACIONES</option>
-                        <option  value="**SOFTWARE**">SOFTWARE</option>
-                        <option  value="**FALLA MECÁNICA**">FALLA MECÁNICA</option>
-                        <option  value="**FALLA POR USUARIO**">FALLA POR USUARIO</option>
-                        <option  value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option>
-                        <option value="OTROS">OTROS</option>
+                        <option  class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option>
+                        <option  class="guardar" value="**VANDALISMO**">VANDALISMO</option>
+                        <option  class="guardar" value="**ADECUACIONES**">ADECUACIONES</option>
+                        <option  class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option>
+                        <option  class="guardar" value="**SOFTWARE**">SOFTWARE</option>
+                        <option  class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option>
+                        <option  class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option>
+                        <option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option>
+                        <option class="guardar" value="OTROS">OTROS</option>
                     </select> 
-                    <p>Otros: </p><input id="otroCargo" type="text" name="">
+                    <p>Otros: </p><input id="otroCargo" type="text" name="" class="guardar" value="${corrInfo.otroCargo}">
                     
-                    <p>Partes:</p><input id="partes2" type="text" name="" value="N/A">
-                    <p>Traking en caso de no tenerla en sitio:</p><input id="trakingSitio2" type="text" name="" value="N/A">
-                    <p>Software:</p><input id="software2" type="text" name="" value="N/A">
-                    <p>Fecha de atención:</p><input id="fechaAtencion2" type="date" name="">
-                    <p>Llegada:</p><input id="llegada2" type="time" name="">
-                    <p>Inicio:</p><input id="inicio2" type="time" name="">
-                    <p>Nota:</p><input id="notas2" type="text" name="" value="N/A">
-                    <p>Validación:</p><input id="validacion2" type="time" name="">
-                    <p>Retiro:</p><input id="retiro2" type="time" name="">
-                    <p>VoBo DEL BANCO  (SE):</p><input id="voboBanco2" type="text" name="">
-                    <p>VoBo DEL SITIO Sucursal/ETV:</p><input id="voboSitio2" type="text" name="">
-                    <p>Comentarios adicionales del IDC:</p><textarea name="" id="comentarios2" cols="30" rows="2" value="N/A">N/A</textarea>
+                    <p>Partes:</p><input id="partes2" type="text" name="" class="guardar" value="${corrInfo.partes}">
+                    <p>Traking en caso de no tenerla en sitio:</p><input id="trakingSitio2" class="guardar" type="text" name="" value="${corrInfo.trakingSitio}">
+                    <p>Software:</p><input id="software2" type="text" name="" class="guardar" value="${corrInfo.software}">
+                    <p>Fecha de atención:</p><input id="fechaAtencion2" type="date" name="" class="guardar" value="${corrInfo.fechaAtencion}">
+                    <p>Llegada:</p><input id="llegada2" type="time" name="" class="guardar" value="${corrInfo.llegada}">
+                    <p>Inicio:</p><input id="inicio2" type="time" name="" class="guardar" value="${corrInfo.inicio}">
+                    <p>Nota:</p><input id="notas2" type="text" name="" class="guardar" value="${corrInfo.notas}">
+                    <p>Validación:</p><input id="validacion2" type="time" name="" class="guardar" value="${corrInfo.validacion}">
+                    <p>Retiro:</p><input id="retiro2" type="time" name="" class="guardar" value="${corrInfo.retiro}">
+                    <p>VoBo DEL BANCO  (SE):</p><input id="voboBanco2" type="text" name="" class="guardar" value="${corrInfo.voboBanco}">
+                    <p>VoBo DEL SITIO Sucursal/ETV:</p><input id="voboSitio2" type="text" name="" class="guardar" value="${corrInfo.voboSitio}">
+                    <p>Comentarios adicionales del IDC:</p><textarea name="" id="comentarios2" class="guardar" cols="30" rows="2">${corrInfo.comentarios}</textarea>
                 </form>
             </div>
     `;
     forms.appendChild(formulario);
+    guardarEstado();
 }
 
 function cargos(cargo, cargoValor,otroCargo){
@@ -498,7 +547,7 @@ function cargos(cargo, cargoValor,otroCargo){
     
 }
 
-
+//Avisa al usuario en caso de no tener su nombre, ingresar su nombre.
 function preguntaNombre(){
     alert('NO SE DETECTO NOMBRE DE IDC');
     nombreIDC = prompt('Ingresa nombre IDC:');
@@ -514,13 +563,22 @@ function guardarEstado(){
         guardar[index].addEventListener('blur',()=>{
 
             //Ejecuta la acción que guarda el estado
-            guardandoLocal();
+            if(seleccionado === 1){
+                guardandoInstalaciones();
+                return;
+            }
+
+            if(seleccionado === 2){
+                guardandoCorrectivos();
+                return;
+            }
+        
         });
     }
 }
 
 //Guarda la información en un objeto al ser invocado por el blur
-function guardandoLocal(){
+function guardandoInstalaciones(){
     infoInst.nombre = document.querySelector('#nombre').value;
     infoInst.fecha = document.querySelector('#fecha').value;
     infoInst.banco = document.querySelector('#banco').value;
@@ -569,51 +627,164 @@ function guardandoLocal(){
 
     console.log(infoString);
     //guardar en local
-    localStorage.setItem('info',infoString);
+    localStorage.setItem('infoInstalaciones',infoString);
 }
+
+
+
+function guardandoCorrectivos(){
+    corrInfo.proveedor = document.querySelector('#proveedor2').value;
+    corrInfo.tarea = document.querySelector('#tarea2').value;
+    corrInfo.tiket = document.querySelector('#tiket2').value;
+    corrInfo.id = document.querySelector('#id2').value;
+    corrInfo.nombreSitio = document.querySelector("#nombreSitio2").value;
+    corrInfo.marcaModelo = document.querySelector("#marcaModelo2").value;
+    corrInfo.serieEquipo = document.querySelector('#serieEquipo2').value;
+    corrInfo.sitio = document.querySelector('#sitio2').value;
+    corrInfo.nombre = document.querySelector('#nombre2').value;
+    
+    corrInfo.encontroCajero = document.querySelector('#encontroCajero2').value;
+    corrInfo.fallaReportada = document.querySelector('#fallaReportada2').value;
+    corrInfo.codigoError = document.querySelector('#codigoError2').value;
+    corrInfo.modulo = document.querySelector('#modulo2').value;
+    corrInfo.causa = document.querySelector('#causa2').value;
+    corrInfo.solucion = document.querySelector('#solucion2').value;
+    corrInfo.pruebas = document.querySelector('#pruebas2').value;
+    corrInfo.comoDejaCajero = document.querySelector('#dejaCajero2').value;
+    
+    //Voltajes
+    corrInfo.fti = document.querySelector('#FTI2').value;
+    corrInfo.fni = document.querySelector('#FNI2').value;
+    corrInfo.tni = document.querySelector('#TNI2').value;
+    corrInfo.fto = document.querySelector('#FTO2').value;
+    corrInfo.fno = document.querySelector('#FNO2').value;
+    corrInfo.tno = document.querySelector('#TNO2').value;
+    
+    corrInfo.datosEntorno = document.querySelector('#datosEntorno2').value;
+    corrInfo.cargo = document.querySelector('#cargo2').value;
+    corrInfo.cargoValor = document.querySelector('#cargoValor2').value;
+    corrInfo.otroCargo = document.querySelector('#otroCargo').value;
+    
+    corrInfo.partes = document.querySelector('#partes2').value;
+    corrInfo.trakingSitio = document.querySelector('#trakingSitio2').value;
+    corrInfo.software = document.querySelector('#software2').value;
+    corrInfo.fechaAtencion = document.querySelector('#fechaAtencion2').value;
+    corrInfo.llegada = document.querySelector('#llegada2').value;
+    corrInfo.inicio = document.querySelector('#inicio2').value;
+    corrInfo.notas = document.querySelector('#notas2').value;
+    corrInfo.validacion = document.querySelector('#validacion2').value;
+    corrInfo.retiro = document.querySelector('#retiro2').value;
+    corrInfo.voboBanco = document.querySelector('#voboBanco2').value;
+    corrInfo.voboSitio = document.querySelector('#voboSitio2').value;
+    corrInfo.comentarios = document.querySelector('#comentarios2').value;
+    console.log(corrInfo);
+
+    //transformar en texto para guardarlo en local
+    infoString = JSON.stringify(corrInfo);
+
+    console.log(infoString);
+    //guardar en local
+    localStorage.setItem('infoCorrectivos',infoString);
+}
+
+
 //Recuper la info de local
 function retornarInfo(){
-    const infoRetorno = localStorage.getItem('info');
+    console.log('retornado info...');
+    const infoRetorno = localStorage.getItem('infoInstalaciones');
+    
+    const infoRetorno2 = localStorage.getItem('infoCorrectivos');
+
     infoJson = JSON.parse(infoRetorno);
+    infoJson2 = JSON.parse(infoRetorno2);
+    
     if(infoJson){
         infoInst.nombre = infoJson.nombre;
-    infoInst.fecha = infoJson.fecha;
-    infoInst.banco = infoJson.banco;
-    infoInst.sucursal = infoJson.sucursal;
-    infoInst.id = infoJson.id;
-    infoInst.llamada = infoJson.llamada;
-    infoInst.tiket = infoJson.tiket;
-    infoInst.tarea = infoJson.tarea;
-    infoInst.serieEquipo = infoJson.serieEquipo;
-    infoInst.modelo = infoJson.modelo;
-    infoInst.horaInicioViaje = infoJson.horaInicioViaje
-    infoInst.horaLlegada = infoJson.horaLlegada;
-    infoInst.horaInicioRep = infoJson.horaInicioRep;
-    infoInst.horaTerminoRep = infoJson.horaInicioRep;
-    infoInst.horaValidacionBco = infoJson.horaValidacionBco;
-    infoInst.fallaReportada = infoJson.fallaReportada;
-    infoInst.comentarios = infoJson.comentarios;
-    infoInst.causa = infoJson.causa;
-    infoInst.solucion = infoJson.solucion
-    infoInst.codigoIntervencion = infoJson.codigoIntervencion;
-    infoInst.validaLinea = infoJson.validaLinea;
-    infoInst.validaSitio = infoJson.validaSitio;
-    infoInst.aireAcondicionado = infoJson.aireAcondicionado;
-    infoInst.regulador = infoJson.regulador;
-    infoInst.condiciones = infoJson.condiciones;
-    infoInst.fallaEncontrada = infoJson.fallaEncontrada;
-    infoInst.fti = infoJson.fti;
-    infoInst.fni = infoJson.fni;
-    infoInst.tni = infoJson.tni;
-    infoInst.fto = infoJson.fto;
-    infoInst.fno = infoJson.fno;
-    infoInst.tno = infoJson.tno;
-    infoInst.numParte = infoJson.numParte;
-    infoInst.descripcionParte = infoJson.descripcionParte;
-    infoInst.cantidad = infoJson.cantidad;
-    infoInst.NSInstalada = infoJson.NSInstalada;
-    infoInst.NSRetirada = infoJson.NSRetirada;
-    infoInst.kilometros = infoJson.kilometros;
+        infoInst.fecha = infoJson.fecha;       
+        infoInst.banco = infoJson.banco;
+        infoInst.sucursal = infoJson.sucursal;
+        infoInst.id = infoJson.id;
+        infoInst.llamada = infoJson.llamada;
+        infoInst.tiket = infoJson.tiket;
+        infoInst.tarea = infoJson.tarea;
+        infoInst.serieEquipo = infoJson.serieEquipo;
+        infoInst.modelo = infoJson.modelo;
+        infoInst.horaInicioViaje = infoJson.horaInicioViaje
+        infoInst.horaLlegada = infoJson.horaLlegada;
+        infoInst.horaInicioRep = infoJson.horaInicioRep;
+        infoInst.horaTerminoRep = infoJson.horaInicioRep;
+        infoInst.horaValidacionBco = infoJson.horaValidacionBco;
+        infoInst.fallaReportada = infoJson.fallaReportada;
+        infoInst.comentarios = infoJson.comentarios;
+        infoInst.causa = infoJson.causa;
+        infoInst.solucion = infoJson.solucion
+        infoInst.codigoIntervencion = infoJson.codigoIntervencion;
+        infoInst.validaLinea = infoJson.validaLinea;
+        infoInst.validaSitio = infoJson.validaSitio;
+        infoInst.aireAcondicionado = infoJson.aireAcondicionado;
+        infoInst.regulador = infoJson.regulador;
+        infoInst.condiciones = infoJson.condiciones;
+        infoInst.fallaEncontrada = infoJson.fallaEncontrada;
+        infoInst.fti = infoJson.fti;
+        infoInst.fni = infoJson.fni;
+        infoInst.tni = infoJson.tni;
+        infoInst.fto = infoJson.fto;
+        infoInst.fno = infoJson.fno;
+        infoInst.tno = infoJson.tno;
+        infoInst.numParte = infoJson.numParte;
+        infoInst.descripcionParte = infoJson.descripcionParte;
+        infoInst.cantidad = infoJson.cantidad;
+        infoInst.NSInstalada = infoJson.NSInstalada;
+        infoInst.NSRetirada = infoJson.NSRetirada;
+        infoInst.kilometros = infoJson.kilometros;
     }
+    //Correctivos
+    if(infoJson2){
+        corrInfo.proveedor = infoJson2.proveedor;
+        corrInfo.tarea = infoJson2.tarea;
+        corrInfo.tiket = infoJson2.tiket;
+        corrInfo.id = infoJson2.id;
+        corrInfo.nombreSitio = infoJson2.nombreSitio;
+        corrInfo.marcaModelo = infoJson2.marcaModelo;
+        corrInfo.serie = infoJson2.serieEquipo;
+        corrInfo.sitio = infoJson2.sitio;
+        corrInfo.nombre = infoJson2.nombre;
+        
+        corrInfo.encontroCajero = infoJson2.encontroCajero;
+        corrInfo.fallaReportada = infoJson2.fallaReportada;
+        corrInfo.codigoError = infoJson2.codigoError;
+        corrInfo.modulo = infoJson2.modulo;
+        corrInfo.causa = infoJson2.causa;
+        corrInfo.solucion = infoJson2.solucion;
+        corrInfo.pruebas = infoJson2.pruebas;
+        corrInfo.comoDejaCajero = infoJson2.comoDejaCajero;
+        
+        //Voltajes
+        corrInfo.fti = infoJson2.fti;
+        corrInfo.fni = infoJson2.fni;
+        corrInfo.tni = infoJson2.tni;
+        corrInfo.fto = infoJson2.fto;
+        corrInfo.fno = infoJson2.fno;
+        corrInfo.tno = infoJson2.tno;
+        
+        corrInfo.datosEntorno = infoJson2.datosEntorno;
+        corrInfo.cargo = infoJson2.cargo;
+        corrInfo.cargoValor = infoJson2.cargoValor;
+        corrInfo.otroCargo = infoJson2.otroCargo;
+        
+        corrInfo.partes = infoJson2.partes;
+        corrInfo.trakingSitio = infoJson2.trakingSitio;
+        corrInfo.software = infoJson2.software;
+        corrInfo.fechaAtencion = infoJson2.fechaAtencion;
+        corrInfo.llegada = infoJson2.llegada;
+        corrInfo.inicio = infoJson2.inicio;
+        corrInfo.notas = infoJson2.notas;
+        corrInfo.validacion = infoJson2.validacion;
+        corrInfo.retiro = infoJson2.retiro;
+        corrInfo.voboBanco = infoJson2.voboBanco;
+        corrInfo.voboSitio = infoJson2.voboSitio;
+        corrInfo.comentarios = infoJson2.comentarios;
+        }
+    
     
 }
