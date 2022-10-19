@@ -19,7 +19,7 @@ let infoJson, infoJson2;
 
 let infoInst = {
     nombre:'',
-    fecha:'10-10-2022',
+    fecha:'',
     banco:'',
     sucursal:'',
     id:'',
