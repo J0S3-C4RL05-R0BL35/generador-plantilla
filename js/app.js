@@ -454,7 +454,8 @@ function crearFormCorr(){
                     <p>Nombre del sitio:</p><input id="nombreSitio2" type="text" class="guardar" value="${corrInfo.nombreSitio}">
                     <p>Marca y modelo de ATM:</p><input id="marcaModelo2" type="text" name="" class="guardar" value="${corrInfo.marcaModelo}">
                     <p>Serie:</p><input id="serieEquipo2" type="text" name="" class="guardar" value="${corrInfo.serie}">
-                    <p>Sitio:</p><input id="sitio2" type="text" name="" class="guardar" value="${corrInfo.sitio}">
+                    
+                    ${resultadoSitio()}                    
                     <p>Nombre del IDC: </p>
                     <input id="nombre2" type="text" name="" class="guardar" value="${nombreIDC}">
                     <p>Como encontró el cajero:</p><input class="guardar" value="${corrInfo.encontroCajero}" id="encontroCajero2" type="text" name="">
@@ -596,6 +597,18 @@ function guardandoInstalaciones(){
     //guardar en local
     localStorage.setItem('infoInstalaciones',infoString);
 }
+function resultadoSitio(){
+    let resultado;
+    if(corrInfo.sitio === 'SUCURSAL'){
+        resultado = '<p>Sitio:</p><select id="sitio2" name="select"><option selected class="guardar" value="SUCURSAL">SUCURSAL</option><option class="guardar" value="REMOTO">REMOTO</option></select> ';  
+    }else if(corrInfo.sitio === 'REMOTO'){
+        resultado = '<p>Sitio:</p><select id="sitio2" name="select"><option class="guardar" value="SUCURSAL">SUCURSAL</option><option selected class="guardar" value="REMOTO">REMOTO</option></select> ';    
+    }else{
+        resultado = '<p>Sitio:</p><select id="sitio2" name="select"><option class="guardar" value="SUCURSAL">SUCURSAL</option><option  class="guardar" value="REMOTO">REMOTO</option></select> ';
+    }
+    return resultado;
+}
+
 function resultadoCargo(){
     let resultado;
     if(corrInfo.cargo === '**CON CARGO**'){
@@ -785,5 +798,5 @@ function retornarInfo(){
         corrInfo.voboBanco = infoJson2.voboBanco;
         corrInfo.voboSitio = infoJson2.voboSitio;
         corrInfo.comentarios = infoJson2.comentarios;
-    }
+        }   
 }
