@@ -12,14 +12,19 @@ const forms = document.querySelector('#formulario');
 const formInst = document.querySelector('#formulario');
 
 
-let seleccionado = 0;
-let nombreIDC = localStorage.getItem('nombreIDC');
 
-let infoJson, infoJson2;
+
+
+let nombreIDC = localStorage.getItem('nombreIDC');
+let infoJson;
+
+
+let infoJson2;
+
 
 let infoInst = {
     nombre:'',
-    fecha:'',
+    fecha:'10-10-2022',
     banco:'',
     sucursal:'',
     id:'',
@@ -84,9 +89,7 @@ let corrInfo = {
     tno:'0.2',
     datosEntorno:'No hay nada en el entono que afecte al ATM',
     //con cargo sin cargo
-    cargo:'',
     //valor del cargo
-    cargoValor:'',
     otroCargo:'',
     partes:'N/A',
     trakingSitio:'N/A',
@@ -102,10 +105,14 @@ let corrInfo = {
     comentarios:'N/A'
 };
 
+//infoInst.banco;
+let seleccionado = 0;
+
 //EVENTOS
 document.addEventListener('DOMContentLoaded',()=>{
     //Recupera la info de local
     retornarInfo();
+    
     if(!nombreIDC){
         preguntaNombre();
     }
@@ -130,9 +137,9 @@ function addEventListeners(){
 
 
 btnLimpiar.addEventListener('click',()=>{
+    //e.preventDefault();
     localStorage.removeItem('infoInstalaciones');
     localStorage.removeItem('infoCorrectivos');
-    location.reload();
 });
 
 
@@ -143,15 +150,21 @@ function mostrarPlantilla(){
         borrarform();
         crearFormInst();
 
+        // const formulario = document.querySelector('.formularios');
+        // formulario.removeAttribute('hidden');
     } else if(seleccionado == 2){
         borrarform();
         crearFormCorr();
+        // const formulario = document.querySelector('.formularios2');
+        // formulario.removeAttribute('hidden');
     }
     btnGenerar.classList.remove('deshabilitar');
- }
+    //btnGuardar.classList.remove('deshabilitar');
+    // btnCor.remove()
+}
 
- //Revisar funcion completa o pendediente
 function mostrarLayouts(){
+    // formAction.remove();    
     console.log('Guardando layouts...');
 }
 
@@ -164,6 +177,7 @@ function generarLayout(e){
     }else if(seleccionado == 2){
         layoutCorrectivos();
     }
+    //layoutCorrectivos();
 }
 
 //Función que copia el resultado a el portapapeles.
@@ -196,9 +210,9 @@ function borrarform(){
     }
 }
 
-
 function salvarInformacion(e){
    e.preventDefault()
+    console.log('Salvando información...')
 }
 
 function layoutInstalaciones(){
@@ -237,7 +251,6 @@ function layoutInstalaciones(){
     const fno = document.querySelector('#FNO').value;
     const tno = document.querySelector('#TNO').value;
 
-    
     const numParte = document.querySelector('#numParte').value;
     const descripcionParte = document.querySelector('#descripcionParte').value;
     const cantidad = document.querySelector('#cantidad').value;
@@ -247,6 +260,7 @@ function layoutInstalaciones(){
     
     const elemento = document.createElement('div');
 
+    // elemento.classList.add('resultado');
     elemento.innerHTML = `
     <p>INGENIERO: ${nombre.toUpperCase()}</p>
     <p>FECHA: ${fecha.toUpperCase()}</p>
@@ -288,6 +302,8 @@ function layoutInstalaciones(){
 
     salidaPlantilla.appendChild(elemento);
     btnCopiar.classList.remove('deshabilitar');
+    //limpiarForm();
+    // formAction.reset();
 }
 
 function layoutCorrectivos(){
@@ -338,6 +354,7 @@ function layoutCorrectivos(){
     const comentarios = document.querySelector('#comentarios2').value;
     
     const elemento = document.createElement('div');
+    // elemento.classList.add('resultado');
     elemento.innerHTML = `
     <p>PROVEEDOR: ${proveedor.toUpperCase()}</p>
     <p>TK: ${tarea.toUpperCase()}</p>
@@ -454,8 +471,7 @@ function crearFormCorr(){
                     <p>Nombre del sitio:</p><input id="nombreSitio2" type="text" class="guardar" value="${corrInfo.nombreSitio}">
                     <p>Marca y modelo de ATM:</p><input id="marcaModelo2" type="text" name="" class="guardar" value="${corrInfo.marcaModelo}">
                     <p>Serie:</p><input id="serieEquipo2" type="text" name="" class="guardar" value="${corrInfo.serie}">
-                    
-                    ${resultadoSitio()}                    
+                    <p>Sitio:</p><input id="sitio2" type="text" name="" class="guardar" value="${corrInfo.sitio}">
                     <p>Nombre del IDC: </p>
                     <input id="nombre2" type="text" name="" class="guardar" value="${nombreIDC}">
                     <p>Como encontró el cajero:</p><input class="guardar" value="${corrInfo.encontroCajero}" id="encontroCajero2" type="text" name="">
@@ -484,8 +500,21 @@ function crearFormCorr(){
                     </div>
                     <p>Datos especificos del entorno ajeno al ATM</p><textarea name="" class="guardar" id="datosEntorno2" cols="30" rows="5" >${corrInfo.datosEntorno}</textarea>
                     <p>Con cargo / Sin cargo</p>
-                    ${resultadoCargo()}
-                    ${resultadoCargoValor()}
+                    <select id="cargo2" name="select">
+                        <option  class="guardar" value="CON CARGO">CON CARGO</option>
+                        <option  class="guardar" value="SIN CARGO">SIN CARGO</option>
+                    </select> 
+                    <select id="cargoValor2" name="select">
+                        <option  class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option>
+                        <option  class="guardar" value="**VANDALISMO**">VANDALISMO</option>
+                        <option  class="guardar" value="**ADECUACIONES**">ADECUACIONES</option>
+                        <option  class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option>
+                        <option  class="guardar" value="**SOFTWARE**">SOFTWARE</option>
+                        <option  class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option>
+                        <option  class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option>
+                        <option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option>
+                        <option class="guardar" value="OTROS">OTROS</option>
+                    </select> 
                     <p>Otros: </p><input id="otroCargo" type="text" name="" class="guardar" value="${corrInfo.otroCargo}">
                     
                     <p>Partes:</p><input id="partes2" type="text" name="" class="guardar" value="${corrInfo.partes}">
@@ -509,9 +538,9 @@ function crearFormCorr(){
 
 function cargos(cargo, cargoValor,otroCargo){
     if (cargoValor != 'OTROS'){
-        return `${cargo.toUpperCase()}/${cargoValor.toUpperCase()}`;
+        return `${cargo.toUpperCase()} ${cargoValor.toUpperCase()}`;
     }else{
-        return `${cargo.toUpperCase()}/${otroCargo.toUpperCase()}`;
+        return `${cargo.toUpperCase()} ${otroCargo.toUpperCase()}`;
     }
     
 }
@@ -526,6 +555,7 @@ function preguntaNombre(){
 //Permite guardar estado al salir de cada formulario
 function guardarEstado(){
     const guardar = document.querySelectorAll('.guardar');
+    console.log(guardar);
 
     for (let index = 0; index < guardar.length; index++) {
         guardar[index].addEventListener('blur',()=>{
@@ -543,6 +573,7 @@ function guardarEstado(){
         
         });
     }
+    estadoSalvado = true;
 }
 
 //Guarda la información en un objeto al ser invocado por el blur
@@ -597,55 +628,7 @@ function guardandoInstalaciones(){
     //guardar en local
     localStorage.setItem('infoInstalaciones',infoString);
 }
-function resultadoSitio(){
-    let resultado;
-    if(corrInfo.sitio === 'SUCURSAL'){
-        resultado = '<p>Sitio:</p><select id="sitio2" name="select"><option selected class="guardar" value="SUCURSAL">SUCURSAL</option><option class="guardar" value="REMOTO">REMOTO</option></select> ';  
-    }else if(corrInfo.sitio === 'REMOTO'){
-        resultado = '<p>Sitio:</p><select id="sitio2" name="select"><option class="guardar" value="SUCURSAL">SUCURSAL</option><option selected class="guardar" value="REMOTO">REMOTO</option></select> ';    
-    }else{
-        resultado = '<p>Sitio:</p><select id="sitio2" name="select"><option class="guardar" value="SUCURSAL">SUCURSAL</option><option  class="guardar" value="REMOTO">REMOTO</option></select> ';
-    }
-    return resultado;
-}
 
-function resultadoCargo(){
-    let resultado;
-    if(corrInfo.cargo === '**CON CARGO**'){
-        resultado = '<select id="cargo2" name="select"><option selected class="guardar" value="**CON CARGO**">CON CARGO</option><option  class="guardar" value="**SIN CARGO**">SIN CARGO</option></select> ';
-        
-    }else if(corrInfo.cargo === '**SIN CARGO**'){
-        resultado = '<select id="cargo2" name="select"><option  class="guardar" value="**CON CARGO**">CON CARGO</option><option selected class="guardar" value="**SIN CARGO**">SIN CARGO</option></select>';
-    } else{
-        resultado = '<select id="cargo2" name="select"><option  class="guardar" value="**CON CARGO**">CON CARGO</option><option class="guardar" value="**SIN CARGO**">SIN CARGO</option></select>';
-    }
-    return resultado;
-}
-
-function resultadoCargoValor(){
-    if(corrInfo.cargoValor === '**FALLA OPERATIVA**'){
-        resultado = '<select selected id="cargoValor2" name="select"><option  class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option  class="guardar" value="**VANDALISMO**">VANDALISMO</option><option  class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option  class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option  class="guardar" value="**SOFTWARE**">SOFTWARE</option><option  class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option  class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option  class="guardar" value="OTROS">OTROS</option></select> '
-    } else if (corrInfo.cargoValor === '**VANDALISMO**'){
-        resultado = '<select id="cargoValor2" name="select"><option  class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option selected class="guardar" value="**VANDALISMO**">VANDALISMO</option><option  class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option  class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option  class="guardar" value="**SOFTWARE**">SOFTWARE</option><option  class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option  class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option  class="guardar" value="OTROS">OTROS</option></select> '
-    }else if (corrInfo.cargoValor === '**ADECUACIONES**'){
-        resultado = '<select id="cargoValor2" name="select"><option  class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option  class="guardar" value="**VANDALISMO**">VANDALISMO</option><option selected class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option  class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option  class="guardar" value="**SOFTWARE**">SOFTWARE</option><option  class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option  class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option  class="guardar" value="OTROS">OTROS</option></select> '
-    } else if (corrInfo.cargoValor === '**COMUNICACIONES**'){
-        resultado = '<select id="cargoValor2" name="select"><option  class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option class="guardar" value="**VANDALISMO**">VANDALISMO</option><option  class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option selected class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option  class="guardar" value="**SOFTWARE**">SOFTWARE</option><option  class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option  class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option  class="guardar" value="OTROS">OTROS</option></select> '
-    }else if (corrInfo.cargoValor === '**SOFTWARE**'){
-        resultado = '<select id="cargoValor2" name="select"><option  class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option  class="guardar" value="**VANDALISMO**">VANDALISMO</option><option class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option  class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option selected class="guardar" value="**SOFTWARE**">SOFTWARE</option><option  class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option  class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option  class="guardar" value="OTROS">OTROS</option></select> '
-    } else if (corrInfo.cargoValor === '**FALLA MECÁNICA**'){
-        resultado = '<select id="cargoValor2" name="select"><option  class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option  class="guardar" value="**VANDALISMO**">VANDALISMO</option><option  class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option  class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option  class="guardar" value="**SOFTWARE**">SOFTWARE</option><option  class="guardar" selected value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option  class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option  class="guardar" value="OTROS">OTROS</option></select> '
-    }else if (corrInfo.cargoValor === '**FALLA POR USUARIO**'){
-        resultado = '<select id="cargoValor2" name="select"><option  class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option  class="guardar" value="**VANDALISMO**">VANDALISMO</option><option  class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option  class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option  class="guardar" value="**SOFTWARE**">SOFTWARE</option><option  class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option  class="guardar" selected value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option  class="guardar" value="OTROS">OTROS</option></select> '
-    } else if (corrInfo.cargoValor === '**EQUIPO SIN FALLA**'){
-        resultado = '<select id="cargoValor2" name="select"><option  class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option class="guardar" value="**VANDALISMO**">VANDALISMO</option><option  class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option  class="guardar" value="**SOFTWARE**">SOFTWARE</option><option  class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option  class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option selected class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option  class="guardar" value="OTROS">OTROS</option></select> '
-    }else if (corrInfo.cargoValor === 'OTROS'){
-        resultado = '<select id="cargoValor2" name="select"><option  class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option  class="guardar" value="**VANDALISMO**">VANDALISMO</option><option class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option  class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option class="guardar" value="**SOFTWARE**">SOFTWARE</option><option  class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option  class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option selected class="guardar" value="OTROS">OTROS</option></select> '
-    }else{
-        resultado = '<select id="cargoValor2" name="select"><option  class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option  class="guardar" value="**VANDALISMO**">VANDALISMO</option><option class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option  class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option class="guardar" value="**SOFTWARE**">SOFTWARE</option><option  class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option  class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option class="guardar" value="OTROS">OTROS</option></select> '
-    }
-    return resultado;
-}
 
 
 function guardandoCorrectivos(){
@@ -693,6 +676,7 @@ function guardandoCorrectivos(){
     corrInfo.voboBanco = document.querySelector('#voboBanco2').value;
     corrInfo.voboSitio = document.querySelector('#voboSitio2').value;
     corrInfo.comentarios = document.querySelector('#comentarios2').value;
+    console.log(corrInfo);
 
     //transformar en texto para guardarlo en local
     infoString = JSON.stringify(corrInfo);
@@ -705,6 +689,7 @@ function guardandoCorrectivos(){
 
 //Recuper la info de local
 function retornarInfo(){
+    console.log('retornado info...');
     const infoRetorno = localStorage.getItem('infoInstalaciones');
     
     const infoRetorno2 = localStorage.getItem('infoCorrectivos');
