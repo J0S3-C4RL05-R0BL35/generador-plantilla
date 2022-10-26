@@ -88,8 +88,8 @@ let corrInfo = {
     fno:'120.0',
     tno:'0.2',
     datosEntorno:'No hay nada en el entono que afecte al ATM',
-    //con cargo sin cargo
-    //valor del cargo
+    cargo: '',
+    cargoValor:'',
     otroCargo:'',
     partes:'N/A',
     trakingSitio:'N/A',
@@ -140,6 +140,7 @@ btnLimpiar.addEventListener('click',()=>{
     //e.preventDefault();
     localStorage.removeItem('infoInstalaciones');
     localStorage.removeItem('infoCorrectivos');
+    location.reload();
 });
 
 
@@ -374,10 +375,10 @@ function layoutCorrectivos(){
     <p>PRUEBAS: ${pruebas.toUpperCase()}</p>
     <p>COMO DEJA EL ATM: ${dejaCajero.toUpperCase()}</p>
     <p>VOLTAJES:
-    <p>F-T IN:${fti.toUpperCase()} F-N IN:${fni.toUpperCase()} T-N IN:${tni.toUpperCase()}</p>
-    <p>F-T IN:${fto.toUpperCase()} F-N IN:${fno.toUpperCase()} T-N IN:${tno.toUpperCase()}</p>
+    <p>F-T IN:(${fti.toUpperCase()}) F-N IN:(${fni.toUpperCase()}) T-N IN:(${tni.toUpperCase()})</p>
+    <p>F-T IN:(${fto.toUpperCase()}) F-N IN:(${fno.toUpperCase()}) T-N IN:(${tno.toUpperCase()})</p>
     <p>DATOS ESPECÍFICOS DEL ENTORNO AJENO AL ATM: ${datosEntorno.toUpperCase()}</p>
-    <p>CON CARGO O SIN CARGO: ${cargos(cargo, cargoValor, otroCargo)}</p>
+    <p>CON CARGO O SIN CARGO:</p><p>${cargos(cargo, cargoValor, otroCargo)}</p>
     <p>PARTES: ${parte.toUpperCase()}</p>
     <p>TRAKING EN CASO DE NO TENERLO EN SITIO: ${trakingSitio.toUpperCase()}</p>
     <p>FECHA DE ATENCIÓN: ${fechaAtencion.toUpperCase()}</p>
@@ -395,6 +396,8 @@ function layoutCorrectivos(){
     salidaPlantilla.appendChild(elemento);
     btnCopiar.classList.remove('deshabilitar');
 }
+
+//Crea formulario de instalaciones
 function crearFormInst(){
     const formulario = document.createElement('div');
     formulario.innerHTML=`
@@ -459,6 +462,7 @@ function crearFormInst(){
     guardarEstado();
 }
 
+//Crea el formulario de servicios
 function crearFormCorr(){
     const formulario = document.createElement('div');
     formulario.innerHTML=`
@@ -471,7 +475,7 @@ function crearFormCorr(){
                     <p>Nombre del sitio:</p><input id="nombreSitio2" type="text" class="guardar" value="${corrInfo.nombreSitio}">
                     <p>Marca y modelo de ATM:</p><input id="marcaModelo2" type="text" name="" class="guardar" value="${corrInfo.marcaModelo}">
                     <p>Serie:</p><input id="serieEquipo2" type="text" name="" class="guardar" value="${corrInfo.serie}">
-                    <p>Sitio:</p><input id="sitio2" type="text" name="" class="guardar" value="${corrInfo.sitio}">
+                    ${resultadoSitio()}
                     <p>Nombre del IDC: </p>
                     <input id="nombre2" type="text" name="" class="guardar" value="${nombreIDC}">
                     <p>Como encontró el cajero:</p><input class="guardar" value="${corrInfo.encontroCajero}" id="encontroCajero2" type="text" name="">
@@ -500,21 +504,8 @@ function crearFormCorr(){
                     </div>
                     <p>Datos especificos del entorno ajeno al ATM</p><textarea name="" class="guardar" id="datosEntorno2" cols="30" rows="5" >${corrInfo.datosEntorno}</textarea>
                     <p>Con cargo / Sin cargo</p>
-                    <select id="cargo2" name="select">
-                        <option  class="guardar" value="CON CARGO">CON CARGO</option>
-                        <option  class="guardar" value="SIN CARGO">SIN CARGO</option>
-                    </select> 
-                    <select id="cargoValor2" name="select">
-                        <option  class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option>
-                        <option  class="guardar" value="**VANDALISMO**">VANDALISMO</option>
-                        <option  class="guardar" value="**ADECUACIONES**">ADECUACIONES</option>
-                        <option  class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option>
-                        <option  class="guardar" value="**SOFTWARE**">SOFTWARE</option>
-                        <option  class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option>
-                        <option  class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option>
-                        <option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option>
-                        <option class="guardar" value="OTROS">OTROS</option>
-                    </select> 
+                    ${resultadoCargo()}
+                    ${resultadoCargoValor()}
                     <p>Otros: </p><input id="otroCargo" type="text" name="" class="guardar" value="${corrInfo.otroCargo}">
                     
                     <p>Partes:</p><input id="partes2" type="text" name="" class="guardar" value="${corrInfo.partes}">
@@ -574,6 +565,56 @@ function guardarEstado(){
         });
     }
     estadoSalvado = true;
+}
+
+function resultadoSitio(){
+    let resultado;
+    if(corrInfo.sitio === 'SUCURSAL'){
+        resultado = '<p>Sitio:</p><select id="sitio2" name="select"><option class="guardar" selected value="SUCURSAL">SUCURSAL</option><option  class="guardar" value="REMOTO">REMOTO</option></select>';
+    }else if(corrInfo.sitio == 'REMOTO'){
+        resultado = '<p>Sitio:</p><select id="sitio2" name="select"><option class="guardar" value="SUCURSAL">SUCURSAL</option><option selected class="guardar" value="REMOTO">REMOTO</option></select>';
+    }else{ 
+        resultado = '<p>Sitio:</p><select id="sitio2" name="select"><option class="guardar" value="SUCURSAL">SUCURSAL</option><option class="guardar" value="REMOTO">REMOTO</option></select>';
+    }
+    return resultado;
+}
+
+function resultadoCargo(){
+    let resultado;
+    if(corrInfo.cargo === 'CON CARGO'){
+        resultado = '<select id="cargo2" name="select"><option selected class="guardar" value="CON CARGO">CON CARGO</option><option  class="guardar" value="SIN CARGO">SIN CARGO</option></select>';
+    }else if(corrInfo.cargo === 'SIN CARGO'){
+        resultado = '<select id="cargo2" name="select"><option class="guardar" value="CON CARGO">CON CARGO</option><option  class="guardar" selected value="SIN CARGO">SIN CARGO</option></select>'; 
+    }else{
+        resultado = '<select id="cargo2" name="select"><option class="guardar" value="CON CARGO">CON CARGO</option><option  class="guardar" value="SIN CARGO">SIN CARGO</option></select>';    }
+    return resultado;
+}
+
+function resultadoCargoValor(){
+    let resultado;
+    if(corrInfo.cargoValor === '**FALLA OPERATIVA**'){
+        resultado = '<select id="cargoValor2" name="select"><option selected class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option  class="guardar" value="**VANDALISMO**">VANDALISMO</option><option  class="guardar" value="ADECUACIONES">ADECUACIONES</option><option  class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option  class="guardar" value="SOFTWARE**">SOFTWARE</option><option  class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option  class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option class="guardar" value="OTROS">OTROS</option></select>'
+    }else if(corrInfo.cargoValor === '**VANDALISMO**'){
+        resultado = '<select id="cargoValor2" name="select"><option class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option selected class="guardar" value="**VANDALISMO**">VANDALISMO</option><option  class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option  class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option  class="guardar" value="**SOFTWARE**">SOFTWARE</option><option  class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option  class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option class="guardar" value="OTROS">OTROS</option></select>'
+    }else if(corrInfo.cargoValor === '**ADECUACIONES**'){
+        resultado = '<select id="cargoValor2" name="select"><option class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option class="guardar" value="**VANDALISMO**">VANDALISMO</option><option  selected class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option  class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option  class="guardar" value="**SOFTWARE**">SOFTWARE</option><option  class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option  class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option class="guardar" value="OTROS">OTROS</option></select>'
+    }else if(corrInfo.cargoValor === '**COMUNICACIONES**'){
+        resultado = '<select id="cargoValor2" name="select"><option class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option class="guardar" value="**VANDALISMO**">VANDALISMO</option><option class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option selected class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option  class="guardar" value="**SOFTWARE**">SOFTWARE</option><option  class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option  class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option class="guardar" value="OTROS">OTROS</option></select>'
+    }else if(corrInfo.cargoValor === '**SOFTWARE'){
+        resultado = '<select id="cargoValor2" name="select"><option class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option class="guardar" value="**VANDALISMO**">VANDALISMO</option><option class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option selected class="guardar" value="**SOFTWARE**">SOFTWARE</option><option  class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option  class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option class="guardar" value="OTROS">OTROS</option></select>'
+    }else if(corrInfo.cargoValor === '**FALLA MECÁNICA**'){
+        resultado = '<select id="cargoValor2" name="select"><option class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option class="guardar" value="**VANDALISMO**">VANDALISMO</option><option class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option class="guardar" value="**SOFTWARE**">SOFTWARE</option><option selected class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option  class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option class="guardar" value="OTROS">OTROS</option></select>'
+    }else if(corrInfo.cargoValor === '**FALLA POR USUARIO**'){
+        resultado = '<select id="cargoValor2" name="select"><option class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option class="guardar" value="**VANDALISMO**">VANDALISMO</option><option class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option class="guardar" value="**SOFTWARE**">SOFTWARE</option><option class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option selected class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option  class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option class="guardar" value="OTROS">OTROS</option></select>'
+    }else if(corrInfo.cargoValor === '**EQUIPO SIN FALLA**'){
+        resultado = '<select id="cargoValor2" name="select"><option class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option class="guardar" value="**VANDALISMO**">VANDALISMO</option><option class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option class="guardar" value="**SOFTWARE**">SOFTWARE</option><option class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option selected class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option class="guardar" value="OTROS">OTROS</option></select>'
+    }else if(corrInfo.cargoValor === 'OTROS'){
+        resultado = '<select id="cargoValor2" name="select"><option class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option class="guardar" value="**VANDALISMO**">VANDALISMO</option><option class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option class="guardar" value="**SOFTWARE**">SOFTWARE</option><option class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option selected class="guardar" value="OTROS">OTROS</option></select>'
+    }else{
+        resultado = '<select id="cargoValor2" name="select"><option class="guardar" value="**FALLA OPERATIVA**">FALLA OPERATIVA</option><option class="guardar" value="**VANDALISMO**">VANDALISMO</option><option class="guardar" value="**ADECUACIONES**">ADECUACIONES</option><option class="guardar" value="**COMUNICACIONES**">COMUNICACIONES</option><option class="guardar" value="**SOFTWARE**">SOFTWARE</option><option class="guardar" value="**FALLA MECÁNICA**">FALLA MECÁNICA</option><option class="guardar" value="**FALLA POR USUARIO**">FALLA POR USUARIO</option><option class="guardar" value="**EQUIPO SIN FALLA**">EQUIPO SIN FALLA</option><option class="guardar" value="OTROS">OTROS</option></select>'
+    }
+    return resultado;
+
 }
 
 //Guarda la información en un objeto al ser invocado por el blur
