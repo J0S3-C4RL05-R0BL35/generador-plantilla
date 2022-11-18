@@ -531,7 +531,7 @@ function cargos(cargo, cargoValor,otroCargo){
     if (cargoValor != 'OTROS'){
         return `${cargo.toUpperCase()} ${cargoValor.toUpperCase()}`;
     }else{
-        return `${cargo.toUpperCase()} ${otroCargo.toUpperCase()}`;
+        return `${cargo.toUpperCase()} **${otroCargo.toUpperCase()}**`;
     }
     
 }
