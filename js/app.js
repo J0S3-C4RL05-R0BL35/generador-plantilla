@@ -81,12 +81,12 @@ let corrInfo = {
     solucion:'',
     pruebas:'',
     comoDejaCajero:'',
-    fti:'0.0',
-    fni:'0.0',
-    tni:'0.0',
-    fto:'120.0',
-    fno:'120.0',
-    tno:'0.2',
+    fti:'120.0',
+    fni:'120.0',
+    tni:'0.1',
+    fto:'0.0',
+    fno:'0.0',
+    tno:'0.0',
     datosEntorno:'No hay nada en el entono que afecte al ATM',
     cargo: '',
     cargoValor:'',
@@ -309,24 +309,18 @@ function layoutInstalaciones(){
 
 function layoutCorrectivos(){
     //Generar layout
-    const proveedor = document.querySelector('#proveedor2').value;
-    const tarea = document.querySelector('#tarea2').value;
-    const tiket = document.querySelector('#tiket2').value;
+    
     const id = document.querySelector('#id2').value;
     const nombreSitio = document.querySelector("#nombreSitio2").value;
-    const marcaModelo = document.querySelector("#marcaModelo2").value;
+   
     const serieEquipo = document.querySelector('#serieEquipo2').value;
-    const sitio = document.querySelector('#sitio2').value;
-    const nombre = document.querySelector('#nombre2').value;
     
     const encontroCajero = document.querySelector('#encontroCajero2').value;
-    const fallaReportada = document.querySelector('#fallaReportada2').value;
+
     const codigoError = document.querySelector('#codigoError2').value;
-    const modulo = document.querySelector('#modulo2').value;
+ 
     const causa = document.querySelector('#causa2').value;
     const solucion = document.querySelector('#solucion2').value;
-    const pruebas = document.querySelector('#pruebas2').value;
-    const dejaCajero = document.querySelector('#dejaCajero2').value;
     
     //Voltajes
     const fti = document.querySelector('#FTI2').value;
@@ -337,60 +331,35 @@ function layoutCorrectivos(){
     const tno = document.querySelector('#TNO2').value;
     
     const datosEntorno = document.querySelector('#datosEntorno2').value;
-    const cargo = document.querySelector('#cargo2').value;
     const cargoValor = document.querySelector('#cargoValor2').value;
     const otroCargo = document.querySelector('#otroCargo').value;
     
     const parte = document.querySelector('#partes2').value;
     const trakingSitio = document.querySelector('#trakingSitio2').value;
     const software = document.querySelector('#software2').value;
-    const fechaAtencion = document.querySelector('#fechaAtencion2').value;
-    const llegada = document.querySelector('#llegada2').value;
-    const inicio = document.querySelector('#inicio2').value;
-    const notas = document.querySelector('#notas2').value;
-    const validacion = document.querySelector('#validacion2').value;
-    const retiro = document.querySelector('#retiro2').value;
+
     const voboBanco = document.querySelector('#voboBanco2').value;
     const voboSitio = document.querySelector('#voboSitio2').value;
-    const comentarios = document.querySelector('#comentarios2').value;
+
     
     const elemento = document.createElement('div');
     // elemento.classList.add('resultado');
     elemento.innerHTML = `
-    <p>PROVEEDOR: ${proveedor.toUpperCase()}</p>
-    <p>TK: ${tarea.toUpperCase()}</p>
-    <p>SR: ${tiket.toUpperCase()}</p>
     <p>ID ATM: ${id.toUpperCase()}</p>
     <p>NOMBRE DEL SITIO: ${nombreSitio.toUpperCase()}</p>
-    <p>MARCA Y MODELO DE ATM: ${marcaModelo.toUpperCase()}</p>
     <p>SERIE: ${serieEquipo.toUpperCase()}</p>
-    <p>SITIO: ${sitio.toUpperCase()}</p>
-    <p>NOMBRE DEL IDC: ${nombre.toUpperCase()}</p>
     <p>COMO ENCONTRÓ EL CAJERO: ${encontroCajero.toUpperCase()}</p>
-    <p>FALLA REPORTADA: ${fallaReportada.toUpperCase()}</p>
     <p>CÓDIGO DE ERROR: ${codigoError.toUpperCase()}</p>
-    <p>MÓDULO: ${modulo.toUpperCase()}</p>
-    <p>CAUSA: ${causa.toUpperCase()}</p>
-    <p>SOLUCIÓN: ${solucion.toUpperCase()}</p>
-    <p>PRUEBAS: ${pruebas.toUpperCase()}</p>
-    <p>COMO DEJA EL ATM: ${dejaCajero.toUpperCase()}</p>
+    <p>CAUSA (QUE SE ANOTE DATOS DEL ENTORNO): ${causa.toUpperCase()} <p>${cargos(cargoValor, otroCargo)} </p><p>${datosEntorno.toUpperCase()}</p>
+    <p>SOLUCIÓN Y PRUEBAS: ${solucion.toUpperCase()}</p>
     <p>VOLTAJES:
-    <p>F-T IN:(${fti.toUpperCase()}) F-N IN:(${fni.toUpperCase()}) T-N IN:(${tni.toUpperCase()})</p>
-    <p>F-T IN:(${fto.toUpperCase()}) F-N IN:(${fno.toUpperCase()}) T-N IN:(${tno.toUpperCase()})</p>
-    <p>DATOS ESPECÍFICOS DEL ENTORNO AJENO AL ATM: ${datosEntorno.toUpperCase()}</p>
-    <p>CON CARGO O SIN CARGO:</p><p>${cargos(cargo, cargoValor, otroCargo)}</p>
+    <p>VOLTAJES DE PARED/MAMPARA: F-N:(${fni.toUpperCase()}) F-T:(${fti.toUpperCase()}) T-N:(${tni.toUpperCase()})</p>
+    <p>VOLTAJES SALIDA DEL REGULADOR: F-N:(${fno.toUpperCase()}) F-T:(${fto.toUpperCase()}) T-N:(${tno.toUpperCase()})</p>
     <p>PARTES: ${parte.toUpperCase()}</p>
     <p>TRAKING EN CASO DE NO TENERLO EN SITIO: ${trakingSitio.toUpperCase()}</p>
-    <p>FECHA DE ATENCIÓN: ${fechaAtencion.toUpperCase()}</p>
-    <p>ARRIBO: ${llegada.toUpperCase()}</p>
-    <p>INICIO: ${inicio.toUpperCase()}</p>
-    <p>NOTAS: ${notas.toUpperCase()}</p>
-    <p>VALIDACIÓN: ${validacion.toUpperCase()}</p>
-    <p>RETIRO: ${retiro.toUpperCase()}</p>
+    <p>SOFTWARE versión de aplicativo: ${software.toUpperCase()}</p>
     <p>VoBo DEL BANCO (SE): ${voboBanco.toUpperCase()}</p>
     <p>VoBo DEL SITIO SUCURSAL/ETV: ${voboSitio.toUpperCase()}</p>
-    <p>SOFTWARE versión de aplicativo: ${software.toUpperCase()}</p>
-    <p>COMENTARIOS ADICIONALES DEL IDC: ${comentarios.toUpperCase()}</p>
     `;
 
     salidaPlantilla.appendChild(elemento);
@@ -435,15 +404,15 @@ function crearFormInst(){
             <p>Voltajes:</p>
             <div class="votajesIn">
                 <p>Voltajes IN</p>
-                <p>F-T IN:</p><input id="FTI" type="text" name="" value="${infoInst.fti}" class="guardar">
-                <p>F-N IN:</p><input id="FNI" type="text" name="" value="${infoInst.fni}" class="guardar">
-                <p>T-N IN:</p><input id="TNI" type="text" name="" value="${infoInst.tni}" class="guardar">
+                <p>F-N:</p><input id="FNI" type="text" name="" value="${infoInst.fni}" class="guardar">
+                <p>F-T:</p><input id="FTI" type="text" name="" value="${infoInst.fti}" class="guardar">
+                <p>T-N:</p><input id="TNI" type="text" name="" value="${infoInst.tni}" class="guardar">
             </div>
             <div class="votajesOut">
                 <p>Voltajes OUT</p>
-                <p>F-T OUT:</p><input id="FTO" type="text" name="" value="${infoInst.fto}" class="guardar">
-                <p>F-N OUT:</p><input id="FNO" type="text" name="" value="${infoInst.fno}" class="guardar">
-                <p>T-N OUT:</p><input id="TNO" type="text" name="" value="${infoInst.tno}" class="guardar">
+                <p>F-N:</p><input id="FNO" type="text" name="" value="${infoInst.fno}" class="guardar">
+                <p>F-T:</p><input id="FTO" type="text" name="" value="${infoInst.fto}" class="guardar">
+                <p>T-N:</p><input id="TNO" type="text" name="" value="${infoInst.tno}" class="guardar">
             </div>
         </div>
 
@@ -468,58 +437,44 @@ function crearFormCorr(){
     formulario.innerHTML=`
     <div class="form-instalaciones">
                 <form action="post" id="form-action">
-                    <p>Proveedor</p><input id="proveedor2" type="text" name="" class="guardar" value="${corrInfo.proveedor}">
-                    <p>Tarea/Task/TK:</p><input id="tarea2" type="text" name="" class="guardar" value=${corrInfo.tarea}>
-                    <p>Tiket/servicio/SR:</p><input id="tiket2" type="text" name="" class="guardar" value="${corrInfo.tiket}">
+                    
                     <p>Id ATM:</p><input id="id2" type="text" name="" class="guardar" value="${corrInfo.id}">
                     <p>Nombre del sitio:</p><input id="nombreSitio2" type="text" class="guardar" value="${corrInfo.nombreSitio}">
-                    <p>Marca y modelo de ATM:</p><input id="marcaModelo2" type="text" name="" class="guardar" value="${corrInfo.marcaModelo}">
                     <p>Serie:</p><input id="serieEquipo2" type="text" name="" class="guardar" value="${corrInfo.serie}">
-                    ${resultadoSitio()}
-                    <p>Nombre del IDC: </p>
-                    <input id="nombre2" type="text" name="" class="guardar" value="${nombreIDC}">
+                   
+                    
                     <p>Como encontró el cajero:</p><input class="guardar" value="${corrInfo.encontroCajero}" id="encontroCajero2" type="text" name="">
-                    <p>Falla reportada:</p><input type="text" name="" id="fallaReportada2" class="guardar" value="${corrInfo.fallaReportada}">
+                    
                     <p>Código de error:</p><input type="text" name="" id="codigoError2" class="guardar" value="${corrInfo.codigoError}">
-                    <p>Modulo:</p><input type="text" name="" id="modulo2" class="guardar" value="${corrInfo.modulo}">
-                    <p>Causa:</p><textarea name="" id="causa2" cols="30"class="guardar"  rows="5">${corrInfo.causa}</textarea>
-                    <p>Solución:</p><textarea name="" id="solucion2" cols="30" class="guardar" rows="5">${corrInfo.solucion}</textarea>
-                    <p>Pruebas:</p><textarea name="" id="pruebas2" cols="30" class="guardar" rows="5">${corrInfo.pruebas}</textarea>
-                    <p>Como deja el cajero:</p><input id="dejaCajero2" type="text" name="" class="guardar" value="${corrInfo.comoDejaCajero}">
-
-                    <div class="voltajes">
-                        <p>Voltajes:</p>
-                        <div class="votajesIn">
-                            <p>Voltajes IN</p>
-                            <p>F-T IN:</p><input id="FTI2" type="text" name="" class="guardar" value="${corrInfo.fti}">
-                            <p>F-N IN:</p><input id="FNI2" type="text" name="" class="guardar" value="${corrInfo.fni}">
-                            <p>T-N IN:</p><input id="TNI2" type="text" name="" class="guardar" value="${corrInfo.tni}">
-                        </div>
-                        <div class="votajesOut">
-                            <p>Voltajes OUT</p>
-                            <p>F-T OUT:</p><input id="FTO2" type="text" name="" class="guardar" value="${corrInfo.fto}">
-                            <p>F-N OUT:</p><input id="FNO2" type="text" name="" class="guardar" value="${corrInfo.fno}">
-                            <p>T-N OUT:</p><input id="TNO2" type="text" name="" class="guardar" value="${corrInfo.tno}">
-                        </div>
-                    </div>
-                    <p>Datos especificos del entorno ajeno al ATM</p><textarea name="" class="guardar" id="datosEntorno2" cols="30" rows="5" >${corrInfo.datosEntorno}</textarea>
-                    <p>Con cargo / Sin cargo</p>
-                    ${resultadoCargo()}
+                    
+                    <p>Datos especificos del entorno ajeno al ATM:</p><textarea name="" class="guardar" id="datosEntorno2" cols="30" rows="5" >${corrInfo.datosEntorno}</textarea>
+                    <p>Tipo de falla:</p>
+                   
                     ${resultadoCargoValor()}
                     <p>Otros: </p><input id="otroCargo" type="text" name="" class="guardar" value="${corrInfo.otroCargo}">
+                    <p>Causa:</p><p>(Que se anote datos del entorno):</p><textarea name="" id="causa2" cols="30"class="guardar"  rows="5">${corrInfo.causa}</textarea>
+                    <p>Solución y Pruebas:</p><textarea name="" id="solucion2" cols="30" class="guardar" rows="5">${corrInfo.solucion}</textarea>
+                
+                    <div class="voltajes">
+                        <div class="votajesIn">
+                            <p>VOLTAJES DE PARED/MAMPARA:</p>
+                            <p>F-N:</p><input id="FNI2" type="text" name="" class="guardar" value="${corrInfo.fni}">
+                            <p>F-T:</p><input id="FTI2" type="text" name="" class="guardar" value="${corrInfo.fti}">
+                            <p>T-N:</p><input id="TNI2" type="text" name="" class="guardar" value="${corrInfo.tni}">
+                        </div>
+                        <div class="votajesOut">
+                            <p>VOLTAJES SALIDA DEL REGULADOR:</p>
+                            <p>F-N:</p><input id="FNO2" type="text" name="" class="guardar" value="${corrInfo.fno}">
+                            <p>F-T:</p><input id="FTO2" type="text" name="" class="guardar" value="${corrInfo.fto}">
+                            <p>T-N:</p><input id="TNO2" type="text" name="" class="guardar" value="${corrInfo.tno}">
+                        </div>
+                    </div>
                     
                     <p>Partes:</p><input id="partes2" type="text" name="" class="guardar" value="${corrInfo.partes}">
                     <p>Traking en caso de no tenerla en sitio:</p><input id="trakingSitio2" class="guardar" type="text" name="" value="${corrInfo.trakingSitio}">
                     <p>Software:</p><input id="software2" type="text" name="" class="guardar" value="${corrInfo.software}">
-                    <p>Fecha de atención:</p><input id="fechaAtencion2" type="date" name="" class="guardar" value="${corrInfo.fechaAtencion}">
-                    <p>Llegada:</p><input id="llegada2" type="time" name="" class="guardar" value="${corrInfo.llegada}">
-                    <p>Inicio:</p><input id="inicio2" type="time" name="" class="guardar" value="${corrInfo.inicio}">
-                    <p>Nota:</p><input id="notas2" type="text" name="" class="guardar" value="${corrInfo.notas}">
-                    <p>Validación:</p><input id="validacion2" type="time" name="" class="guardar" value="${corrInfo.validacion}">
-                    <p>Retiro:</p><input id="retiro2" type="time" name="" class="guardar" value="${corrInfo.retiro}">
                     <p>VoBo DEL BANCO  (SE):</p><input id="voboBanco2" type="text" name="" class="guardar" value="${corrInfo.voboBanco}">
                     <p>VoBo DEL SITIO Sucursal/ETV:</p><input id="voboSitio2" type="text" name="" class="guardar" value="${corrInfo.voboSitio}">
-                    <p>Comentarios adicionales del IDC:</p><textarea name="" id="comentarios2" class="guardar" cols="30" rows="2">${corrInfo.comentarios}</textarea>
                 </form>
             </div>
     `;
@@ -527,11 +482,11 @@ function crearFormCorr(){
     guardarEstado();
 }
 
-function cargos(cargo, cargoValor,otroCargo){
+function cargos(cargoValor,otroCargo){
     if (cargoValor != 'OTROS'){
-        return `${cargo.toUpperCase()} ${cargoValor.toUpperCase()}`;
+        return `${cargoValor.toUpperCase()}`;
     }else{
-        return `${cargo.toUpperCase()} **${otroCargo.toUpperCase()}**`;
+        return `**${otroCargo.toUpperCase()}**`;
     }
     
 }
