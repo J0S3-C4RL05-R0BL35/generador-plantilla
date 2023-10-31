@@ -628,24 +628,18 @@ function guardandoInstalaciones(){
 
 
 function guardandoCorrectivos(){
-    corrInfo.proveedor = document.querySelector('#proveedor2').value;
-    corrInfo.tarea = document.querySelector('#tarea2').value;
-    corrInfo.tiket = document.querySelector('#tiket2').value;
     corrInfo.id = document.querySelector('#id2').value;
     corrInfo.nombreSitio = document.querySelector("#nombreSitio2").value;
-    corrInfo.marcaModelo = document.querySelector("#marcaModelo2").value;
+    
     corrInfo.serieEquipo = document.querySelector('#serieEquipo2').value;
-    corrInfo.sitio = document.querySelector('#sitio2').value;
-    corrInfo.nombre = document.querySelector('#nombre2').value;
     
     corrInfo.encontroCajero = document.querySelector('#encontroCajero2').value;
-    corrInfo.fallaReportada = document.querySelector('#fallaReportada2').value;
+    
     corrInfo.codigoError = document.querySelector('#codigoError2').value;
-    corrInfo.modulo = document.querySelector('#modulo2').value;
+    
     corrInfo.causa = document.querySelector('#causa2').value;
     corrInfo.solucion = document.querySelector('#solucion2').value;
-    corrInfo.pruebas = document.querySelector('#pruebas2').value;
-    corrInfo.comoDejaCajero = document.querySelector('#dejaCajero2').value;
+    
     
     //Voltajes
     corrInfo.fti = document.querySelector('#FTI2').value;
@@ -656,22 +650,18 @@ function guardandoCorrectivos(){
     corrInfo.tno = document.querySelector('#TNO2').value;
     
     corrInfo.datosEntorno = document.querySelector('#datosEntorno2').value;
-    corrInfo.cargo = document.querySelector('#cargo2').value;
+   
     corrInfo.cargoValor = document.querySelector('#cargoValor2').value;
     corrInfo.otroCargo = document.querySelector('#otroCargo').value;
     
     corrInfo.partes = document.querySelector('#partes2').value;
     corrInfo.trakingSitio = document.querySelector('#trakingSitio2').value;
     corrInfo.software = document.querySelector('#software2').value;
-    corrInfo.fechaAtencion = document.querySelector('#fechaAtencion2').value;
-    corrInfo.llegada = document.querySelector('#llegada2').value;
-    corrInfo.inicio = document.querySelector('#inicio2').value;
-    corrInfo.notas = document.querySelector('#notas2').value;
-    corrInfo.validacion = document.querySelector('#validacion2').value;
-    corrInfo.retiro = document.querySelector('#retiro2').value;
+    
+   
     corrInfo.voboBanco = document.querySelector('#voboBanco2').value;
     corrInfo.voboSitio = document.querySelector('#voboSitio2').value;
-    corrInfo.comentarios = document.querySelector('#comentarios2').value;
+    
     console.log(corrInfo);
 
     //transformar en texto para guardarlo en local
