@@ -92,7 +92,7 @@ a{
     height: 40px;
     background-color: white;
 }
-textarea {
+textarea, select {
     background-color: white;
 }
 
