@@ -92,6 +92,9 @@ a{
     height: 40px;
     background-color: white;
 }
+textarea {
+    background-color: white;
+}
 
 /*SALIDA DE PLANTILLA*/
 .salida-plantilla{
