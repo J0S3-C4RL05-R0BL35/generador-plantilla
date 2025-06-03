@@ -316,7 +316,7 @@ function layoutCorrectivos(){
    
     const serieEquipo = document.querySelector('#serieEquipo2').value;
     
-    const nombreIDC = document.querySelector('#').value;
+    const nombreIDC = document.querySelector('#nombre2').value;
 
     const encontroCajero = document.querySelector('#encontroCajero2').value;
 
@@ -351,6 +351,7 @@ function layoutCorrectivos(){
     <p>ID ATM: ${id.toUpperCase()}</p>
     <p>NOMBRE DEL SITIO: ${nombreSitio.toUpperCase()}</p>
     <p>SERIE: ${serieEquipo.toUpperCase()}</p>
+    <p>NOMBRE IDC: ${nombreIDC.toUpperCase()}</p>
     <p>COMO ENCONTRÓ EL CAJERO: ${encontroCajero.toUpperCase()}</p>
     <p>CÓDIGO DE ERROR: ${codigoError.toUpperCase()}</p>
     <p>CAUSA (QUE SE ANOTE DATOS DEL ENTORNO): ${causa.toUpperCase()} <p>${cargos(cargoValor, otroCargo)} </p><p>${datosEntorno.toUpperCase()}</p>
@@ -445,7 +446,7 @@ function crearFormCorr(){
                     <p>Nombre del sitio:</p><input id="nombreSitio2" type="text" class="guardar" value="${corrInfo.nombreSitio}">
                     <p>Serie:</p><input id="serieEquipo2" type="text" name="" class="guardar" value="${corrInfo.serie}">
                    
-                    <p>Ingeniero: </p><input id="nombre2" type="text" name="" value="${corrInfo.nombre}" class="guardar">
+                    <p>Nombre IDC: </p><input id="nombre2" type="text" name="" value="${corrInfo.nombre}" class="guardar">
                     <p>Como encontró el cajero:</p><input class="guardar" value="${corrInfo.encontroCajero}" id="encontroCajero2" type="text" name="">
                     
                     <p>Código de error:</p><input type="text" name="" id="codigoError2" class="guardar" value="${corrInfo.codigoError}">
