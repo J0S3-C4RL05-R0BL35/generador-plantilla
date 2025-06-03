@@ -21,7 +21,7 @@ let infoJson;
 
 let infoJson2;
 
-
+//Objeto instalaciones, datos a almacenar
 let infoInst = {
     nombre:'',
     fecha:'10-10-2022',
@@ -63,6 +63,7 @@ let infoInst = {
     kilometros:''
 };
 
+//Datos de falla
 let corrInfo = {
     proveedor:'DIEBOLD NIXDORF',
     tarea:'',
@@ -315,6 +316,8 @@ function layoutCorrectivos(){
    
     const serieEquipo = document.querySelector('#serieEquipo2').value;
     
+    const nombreIDC = document.querySelector('#').value;
+
     const encontroCajero = document.querySelector('#encontroCajero2').value;
 
     const codigoError = document.querySelector('#codigoError2').value;
@@ -442,7 +445,7 @@ function crearFormCorr(){
                     <p>Nombre del sitio:</p><input id="nombreSitio2" type="text" class="guardar" value="${corrInfo.nombreSitio}">
                     <p>Serie:</p><input id="serieEquipo2" type="text" name="" class="guardar" value="${corrInfo.serie}">
                    
-                    
+                    <p>Ingeniero: </p><input id="nombre2" type="text" name="" value="${corrInfo.nombre}" class="guardar">
                     <p>Como encontró el cajero:</p><input class="guardar" value="${corrInfo.encontroCajero}" id="encontroCajero2" type="text" name="">
                     
                     <p>Código de error:</p><input type="text" name="" id="codigoError2" class="guardar" value="${corrInfo.codigoError}">
