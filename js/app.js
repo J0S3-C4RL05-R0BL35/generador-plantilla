@@ -348,22 +348,22 @@ function layoutCorrectivos(){
     const elemento = document.createElement('div');
     // elemento.classList.add('resultado');
     elemento.innerHTML = `
-    <p>ID ATM: ${id.toUpperCase()}</p>
-    <p>NOMBRE DEL SITIO: ${nombreSitio.toUpperCase()}</p>
-    <p>SERIE: ${serieEquipo.toUpperCase()}</p>
-    <p>NOMBRE IDC: ${nombreIDC.toUpperCase()}</p>
-    <p>COMO ENCONTRÓ EL CAJERO: ${encontroCajero.toUpperCase()}</p>
-    <p>CÓDIGO DE ERROR: ${codigoError.toUpperCase()}</p>
-    <p>CAUSA: ${causa.toUpperCase()} <p>${cargos(cargoValor, otroCargo)} </p></p>
-    <p>SOLUCIÓN Y PRUEBAS: ${solucion.toUpperCase()}</p>
-    <p>VOLTAJES:
-    <p>VOLTAJES DE PARED/MAMPARA: F-N:(${fni.toUpperCase()}) F-T:(${fti.toUpperCase()}) T-N:(${tni.toUpperCase()})</p>
-    <p>VOLTAJES SALIDA DEL REGULADOR: F-N:(${fno.toUpperCase()}) F-T:(${fto.toUpperCase()}) T-N:(${tno.toUpperCase()})</p>
-    <p>PARTES: ${parte.toUpperCase()}</p>
-    <p>TRAKING EN CASO DE NO TENERLO EN SITIO: ${trakingSitio.toUpperCase()}</p>
-    <p>SOFTWARE versión de aplicativo: ${software.toUpperCase()}</p>
-    <p>VoBo DEL BANCO (SE): ${voboBanco.toUpperCase()}</p>
-    <p>VoBo DEL SITIO SUCURSAL/ETV: ${voboSitio.toUpperCase()}</p>
+    <p>ID ATM: ${id}</p>
+    <p>Nombre del Sitio: ${nombreSitio}</p>
+    <p>Serie: ${serieEquipo}</p>
+    <p>Nombre del IDC: ${nombreIDC}</p>
+    <p>Como encontró el equipo: ${encontroCajero}</p>
+    <p>Código de error': ${codigoError}</p>
+    <p>Causa: ${causa} <p>${cargos(cargoValor, otroCargo)} </p></p>
+    <p>Solución y pruebas: ${solucion}</p>
+    <p>Voltajes:
+    <p>Voltajes de pared: F-N:(${fni}) F-T:(${fti}) T-N:(${tni})</p>
+    <p>Voltajes salida del regulador: F-N:(${fno}) F-T:(${fto}) T-N:(${tno})</p>
+    <p>Partes: ${parte}</p>
+    <p>Traking en caso de no tenerla en sitio: ${trakingSitio.toUpperCase()}</p>
+    <p>Software (Cuando aplique): ${software}</p>
+    <p>VoBo DEL BANCO (SE): ${voboBanco}</p>
+    <p>VoBo DEL SITIO SUCURSAL/ETV: ${voboSitio}</p>
     `;
 
     salidaPlantilla.appendChild(elemento);
