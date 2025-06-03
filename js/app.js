@@ -446,7 +446,7 @@ function crearFormCorr(){
                     <p>Nombre del sitio:</p><input id="nombreSitio2" type="text" class="guardar" value="${corrInfo.nombreSitio}">
                     <p>Serie:</p><input id="serieEquipo2" type="text" name="" class="guardar" value="${corrInfo.serie}">
                    
-                    <p>Nombre IDC: </p><input id="nombre2" type="text" name="" value="${corrInfo.nombre}" class="guardar">
+                    <p>Nombre IDC: </p><input id="nombre2" type="text" name="" value="${nombreIDC}" class="guardar">
                     <p>Como encontró el cajero:</p><input class="guardar" value="${corrInfo.encontroCajero}" id="encontroCajero2" type="text" name="">
                     
                     <p>Código de error:</p><input type="text" name="" id="codigoError2" class="guardar" value="${corrInfo.codigoError}">
