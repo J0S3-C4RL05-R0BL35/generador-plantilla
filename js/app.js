@@ -348,22 +348,22 @@ function layoutCorrectivos(){
     const elemento = document.createElement('div');
     // elemento.classList.add('resultado');
     elemento.innerHTML = `
-    <p>ID ATM: ${id}</p>
-    <p>Nombre del Sitio: ${nombreSitio}</p>
-    <p>Serie: ${serieEquipo}</p>
-    <p>Nombre del IDC: ${nombreIDC}</p>
-    <p>Como encontró el equipo: ${encontroCajero}</p>
-    <p>Código de error': ${codigoError}</p>
-    <p>Causa: ${causa} <p>${cargos(cargoValor, otroCargo)} </p></p>
-    <p>Solución y pruebas: ${solucion}</p>
-    <p>Voltajes:
-    <p>Voltajes de pared: F-N:(${fni}) F-T:(${fti}) T-N:(${tni})</p>
-    <p>Voltajes salida del regulador: F-N:(${fno}) F-T:(${fto}) T-N:(${tno})</p>
-    <p>Partes: ${parte}</p>
-    <p>Traking en caso de no tenerla en sitio: ${trakingSitio.toUpperCase()}</p>
-    <p>Software (Cuando aplique): ${software}</p>
-    <p>VoBo DEL BANCO (SE): ${voboBanco}</p>
-    <p>VoBo DEL SITIO SUCURSAL/ETV: ${voboSitio}</p>
+    <p><strong>ID ATM:</strong> ${id}</strong></p>
+    <p><strong>Nombre del Sitio:</strong> ${nombreSitio}</p>
+    <p><strong>Serie:</strong> ${serieEquipo}</p>
+    <p><strong>Nombre del IDC:</strong> ${nombreIDC}</p>
+    <p><strong>Como encontró el equipo:</strong> ${encontroCajero}</p>
+    <p><strong>Código de error:</strong> ${codigoError}</p>
+    <p><strong>Causa:</strong> ${causa} <p>${cargos(cargoValor, otroCargo)} </p></p>
+    <p><strong>Solución y pruebas:</strong> ${solucion}</p>
+    <p><strong>Voltajes:</strong>
+    <p><strong>Voltajes de pared:</strong> F-N:(${fni}) F-T:(${fti}) T-N:(${tni})</p>
+    <p><strong>Voltajes salida del regulador:</strong> F-N:(${fno}) F-T:(${fto}) T-N:(${tno})</p>
+    <p><strong>Partes:</strong> ${parte}</p>
+    <p><strong>Traking en caso de no tenerla en sitio:</strong> ${trakingSitio.toUpperCase()}</p>
+    <p><strong>Software (Cuando aplique):</strong> ${software}</p>
+    <p><strong>VoBo DEL BANCO (SE):</strong> ${voboBanco}</p>
+    <p><strong>VoBo DEL SITIO SUCURSAL/ETV:</strong> ${voboSitio}</p>
     `;
 
     salidaPlantilla.appendChild(elemento);
