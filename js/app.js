@@ -333,7 +333,7 @@ function layoutCorrectivos(){
     const fno = document.querySelector('#FNO2').value;
     const tno = document.querySelector('#TNO2').value;
     
-    const datosEntorno = document.querySelector('#datosEntorno2').value;
+    //const datosEntorno = document.querySelector('#datosEntorno2').value;
     const cargoValor = document.querySelector('#cargoValor2').value;
     const otroCargo = document.querySelector('#otroCargo').value;
     
@@ -653,7 +653,7 @@ function guardandoCorrectivos(){
     corrInfo.fno = document.querySelector('#FNO2').value;
     corrInfo.tno = document.querySelector('#TNO2').value;
     
-    corrInfo.datosEntorno = document.querySelector('#datosEntorno2').value;
+    //corrInfo.datosEntorno = document.querySelector('#datosEntorno2').value;
    
     corrInfo.cargoValor = document.querySelector('#cargoValor2').value;
     corrInfo.otroCargo = document.querySelector('#otroCargo').value;
@@ -756,7 +756,7 @@ function retornarInfo(){
         corrInfo.fno = infoJson2.fno;
         corrInfo.tno = infoJson2.tno;
         
-        corrInfo.datosEntorno = infoJson2.datosEntorno;
+        //corrInfo.datosEntorno = infoJson2.datosEntorno;
         corrInfo.cargo = infoJson2.cargo;
         corrInfo.cargoValor = infoJson2.cargoValor;
         corrInfo.otroCargo = infoJson2.otroCargo;
