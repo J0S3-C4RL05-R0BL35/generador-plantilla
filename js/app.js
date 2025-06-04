@@ -55,17 +55,17 @@ let infoInst = {
     fto:'130.0',
     fno:'130.1',
     tno:'0.1',
-    numParte:'N/A',
-    descripcionParte:'N/A',
-    cantidad:'N/A',
-    NSInstalada:'N/A',
-    NSRetirada:'N/A',
+    numParte:'',
+    descripcionParte:'',
+    cantidad:'',
+    NSInstalada:'',
+    NSRetirada:'',
     kilometros:''
 };
 
 //Datos de falla
 let corrInfo = {
-    proveedor:'DIEBOLD NIXDORF',
+    proveedor:'',
     tarea:'',
     tiket:'',
     id:'',
@@ -92,18 +92,20 @@ let corrInfo = {
     cargo: '',
     cargoValor:'',
     otroCargo:'',
-    partes:'N/A',
-    trakingSitio:'N/A',
-    software:'N/A',
-    fecha:'',
+    partes:'',
+    trakingSitio:'',
+    software:'',
+    version:'',
+    fecha:'Marzo 25',
+    regrabado:'',
     llegada:'',
     inicio:'',
-    notas:'N/A',
+    notas:'',
     validacion:'',
     retiro:'',
     voboBanco:'',
     voboSitio:'',
-    comentarios:'N/A'
+    comentarios:''
 };
 
 //infoInst.banco;
@@ -313,15 +315,10 @@ function layoutCorrectivos(){
     
     const id = document.querySelector('#id2').value;
     const nombreSitio = document.querySelector("#nombreSitio2").value;
-   
     const serieEquipo = document.querySelector('#serieEquipo2').value;
-    
     const nombreIDC = document.querySelector('#nombre2').value;
-
     const encontroCajero = document.querySelector('#encontroCajero2').value;
-
     const codigoError = document.querySelector('#codigoError2').value;
- 
     const causa = document.querySelector('#causa2').value;
     const solucion = document.querySelector('#solucion2').value;
     
@@ -341,6 +338,10 @@ function layoutCorrectivos(){
     const trakingSitio = document.querySelector('#trakingSitio2').value;
     const software = document.querySelector('#software2').value;
 
+    const version = document.querySelector('#version').value;
+    const fecha = document.querySelector('#fecha').value;
+    const regrabado = document.querySelector('#regrabado').value;
+
     const voboBanco = document.querySelector('#voboBanco2').value;
     const voboSitio = document.querySelector('#voboSitio2').value;
 
@@ -348,22 +349,24 @@ function layoutCorrectivos(){
     const elemento = document.createElement('div');
     // elemento.classList.add('resultado');
     elemento.innerHTML = `
-    <p><strong>ID ATM:</strong> ${id}</strong></p>
+    <p><b>ID ATM:</b> ${id}</strong></p>
     <p><strong>Nombre del Sitio:</strong> ${nombreSitio}</p>
-    <p><strong>Serie:</strong> ${serieEquipo}</p>
+    <p><strong>Serie:</strong> ${serieEquipo.toUpperCase()}</p>
     <p><strong>Nombre del IDC:</strong> ${nombreIDC}</p>
     <p><strong>Como encontró el equipo:</strong> ${encontroCajero}</p>
-    <p><strong>Código de error:</strong> ${codigoError}</p>
+    <p><strong>Código de error:</strong> ${codigoError.toUpperCase()}</p>
     <p><strong>Causa:</strong> ${causa} <p>${cargos(cargoValor, otroCargo)} </p></p>
-    <p><strong>Solución y pruebas:</strong> ${solucion}</p>
+    <p><strong>Solución y pruebas: </strong>${solucion}, Vobo de sucursal ${voboSitio}</p>
     <p><strong>Voltajes:</strong>
     <p><strong>Voltajes de pared:</strong> F-N:(${fni}) F-T:(${fti}) T-N:(${tni})</p>
     <p><strong>Voltajes salida del regulador:</strong> F-N:(${fno}) F-T:(${fto}) T-N:(${tno})</p>
-    <p><strong>Partes:</strong> ${parte}</p>
+    <p><strong>Partes:</strong> ${parte.toUpperCase()}</p>
     <p><strong>Traking en caso de no tenerla en sitio:</strong> ${trakingSitio.toUpperCase()}</p>
-    <p><strong>Software (Cuando aplique):</strong> ${software}</p>
+    <p><strong>Software:</strong> ${software}</p>
+    <p><strong>Versión:</strong> ${version}</p>
+    <p><strong>Fecha:</strong> ${fecha}</p>
+    <p><strong>Vobo de regrabado:</strong> ${regrabado}</p>
     <p><strong>VoBo DEL BANCO (SE):</strong> ${voboBanco}</p>
-    <p><strong>VoBo DEL SITIO SUCURSAL/ETV:</strong> ${voboSitio}</p>
     `;
 
     salidaPlantilla.appendChild(elemento);
@@ -456,7 +459,7 @@ function crearFormCorr(){
                    
                     ${resultadoCargoValor()}
                     <p>Otros: </p><input id="otroCargo" type="text" name="" class="guardar" value="${corrInfo.otroCargo}">
-                    <p>Causa:</p><p>(Que se anote datos del entorno):</p><textarea name="" id="causa2" cols="30"class="guardar"  rows="5">${corrInfo.causa}</textarea>
+                    <p>Causa:</p><textarea name="" id="causa2" cols="30"class="guardar"  rows="5">${corrInfo.causa}</textarea>
                     <p>Solución y Pruebas:</p><textarea name="" id="solucion2" cols="30" class="guardar" rows="5">${corrInfo.solucion}</textarea>
                 
                     <div class="voltajes">
@@ -477,6 +480,9 @@ function crearFormCorr(){
                     <p>Partes:</p><input id="partes2" type="text" name="" class="guardar" value="${corrInfo.partes}">
                     <p>Traking en caso de no tenerla en sitio:</p><input id="trakingSitio2" class="guardar" type="text" name="" value="${corrInfo.trakingSitio}">
                     <p>Software:</p><input id="software2" type="text" name="" class="guardar" value="${corrInfo.software}">
+                    <p>Versión:</p><input id="version" type="text" name="" class="guardar" value="${corrInfo.version}">
+                    <p>Fecha:</p><input id="fecha" type="text" name="" class="guardar" value="${corrInfo.fecha}">
+                    <p>VoBo de regrabado:</p><input id="regrabado" type="text" name="" class="guardar" value="${corrInfo.regrabado}">
                     <p>VoBo DEL BANCO  (SE):</p><input id="voboBanco2" type="text" name="" class="guardar" value="${corrInfo.voboBanco}">
                     <p>VoBo DEL SITIO Sucursal/ETV:</p><input id="voboSitio2" type="text" name="" class="guardar" value="${corrInfo.voboSitio}">
                 </form>
@@ -661,7 +667,9 @@ function guardandoCorrectivos(){
     corrInfo.partes = document.querySelector('#partes2').value;
     corrInfo.trakingSitio = document.querySelector('#trakingSitio2').value;
     corrInfo.software = document.querySelector('#software2').value;
-    
+    corrInfo.version = document.querySelector('#version').value;
+    corrInfo.fecha = document.querySelector('#fecha').value;
+    corrInfo.regrabado = document.querySelector('#regrabado').value;
    
     corrInfo.voboBanco = document.querySelector('#voboBanco2').value;
     corrInfo.voboSitio = document.querySelector('#voboSitio2').value;
@@ -679,7 +687,6 @@ function guardandoCorrectivos(){
 
 //Recuper la info de local
 function retornarInfo(){
-    console.log('retornado info...');
     const infoRetorno = localStorage.getItem('infoInstalaciones');
     
     const infoRetorno2 = localStorage.getItem('infoCorrectivos');
@@ -764,6 +771,9 @@ function retornarInfo(){
         corrInfo.partes = infoJson2.partes;
         corrInfo.trakingSitio = infoJson2.trakingSitio;
         corrInfo.software = infoJson2.software;
+        corrInfo.version = infoJson2.version;
+        corrInfo.fecha = infoJson2.fecha;
+        corrInfo.regrabado = infoJson2.regrabado;
         corrInfo.fechaAtencion = infoJson2.fechaAtencion;
         corrInfo.llegada = infoJson2.llegada;
         corrInfo.inicio = infoJson2.inicio;
