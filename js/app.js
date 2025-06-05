@@ -96,7 +96,7 @@ let corrInfo = {
     trakingSitio:'',
     software:'',
     version:'',
-    fecha:'Marzo 25',
+    fecha:'',
     regrabado:'',
     llegada:'',
     inicio:'',
