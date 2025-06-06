@@ -11,6 +11,8 @@ const btnSalvar = document.querySelector('.btnSalvar');
 const forms = document.querySelector('#formulario');
 const formInst = document.querySelector('#formulario');
 
+const agregarVobo = document.querySelector('#agregar-vobo');
+
 
 
 
@@ -135,12 +137,11 @@ function addEventListeners(){
     btnGenerar.addEventListener('click',generarLayout);
     btnCopiar.addEventListener('click',copiarLayout);
     btnLayout.addEventListener('click',mostrarLayouts);
-    btnSalvar.addEventListener('click',salvarInformacion);  
+    btnSalvar.addEventListener('click',salvarInformacion); 
 }
 
 
 btnLimpiar.addEventListener('click',()=>{
-    //e.preventDefault();
     localStorage.removeItem('infoInstalaciones');
     localStorage.removeItem('infoCorrectivos');
     location.reload();
@@ -169,7 +170,8 @@ function mostrarPlantilla(){
 
 function mostrarLayouts(){
     // formAction.remove();    
-    console.log('Guardando layouts...');
+    
+    
 }
 
 function generarLayout(e){
@@ -181,7 +183,6 @@ function generarLayout(e){
     }else if(seleccionado == 2){
         layoutCorrectivos();
     }
-    //layoutCorrectivos();
 }
 
 //Función que copia el resultado a el portapapeles.
@@ -216,7 +217,8 @@ function borrarform(){
 
 function salvarInformacion(e){
    e.preventDefault()
-    console.log('Salvando información...')
+    
+   
 }
 
 function layoutInstalaciones(){
@@ -306,8 +308,6 @@ function layoutInstalaciones(){
 
     salidaPlantilla.appendChild(elemento);
     btnCopiar.classList.remove('deshabilitar');
-    //limpiarForm();
-    // formAction.reset();
 }
 
 function layoutCorrectivos(){
@@ -343,8 +343,25 @@ function layoutCorrectivos(){
     const regrabado = document.querySelector('#regrabado').value;
 
     const voboBanco = document.querySelector('#voboBanco2').value;
+
     const voboSitio = document.querySelector('#voboSitio2').value;
 
+    const vobo = document.querySelector('.vobo').textContent;
+
+    let voboResultado;
+
+    //validacion de resultado para el vobo de sitio o etv
+
+    if(vobo.textContent){
+        voboResultado = ""
+        console.log("if 1")
+    }else{
+        voboResultado = vobo +" "+ voboSitio
+        console.log("if 2")
+    }
+    
+
+    //TRABAJANDO EN ESTO ACTUALMENTE
     
     const elemento = document.createElement('div');
     // elemento.classList.add('resultado');
@@ -356,7 +373,7 @@ function layoutCorrectivos(){
     <p><strong>Como encontró el equipo:</strong> ${encontroCajero}</p>
     <p><strong>Código de error:</strong> ${codigoError.toUpperCase()}</p>
     <p><strong>Causa:</strong> ${causa} <p>${cargos(cargoValor, otroCargo)} </p></p>
-    <p><strong>Solución y pruebas: </strong>${solucion}, Vobo de sucursal ${voboSitio}</p>
+    <p><strong>Solución y pruebas: </strong>${solucion} ${voboResultado}</p>
     <p><strong>Voltajes:</strong>
     <p><strong>Voltajes de pared:</strong> F-N:(${fni}) F-T:(${fti}) T-N:(${tni})</p>
     <p><strong>Voltajes salida del regulador:</strong> F-N:(${fno}) F-T:(${fto}) T-N:(${tno})</p>
@@ -371,6 +388,7 @@ function layoutCorrectivos(){
 
     salidaPlantilla.appendChild(elemento);
     btnCopiar.classList.remove('deshabilitar');
+
 }
 
 //Crea formulario de instalaciones
@@ -484,12 +502,55 @@ function crearFormCorr(){
                     <p>Fecha:</p><input id="fecha" type="text" name="" class="guardar" value="${corrInfo.fecha}">
                     <p>VoBo de regrabado:</p><input id="regrabado" type="text" name="" class="guardar" value="${corrInfo.regrabado}">
                     <p>VoBo DEL BANCO  (SE):</p><input id="voboBanco2" type="text" name="" class="guardar" value="${corrInfo.voboBanco}">
-                    <p>VoBo DEL SITIO Sucursal/ETV:</p><input id="voboSitio2" type="text" name="" class="guardar" value="${corrInfo.voboSitio}">
+                    <p>Agregar VoBo<input type="checkbox" id="agregar-vobo" name="agregar-vobo" value=""/></p>
+                    <p>de <input type="radio" id="vobo-sucursal" name="vobo" value="sucursal" disabled/>
+                    Sucursal <input type="radio" id="vobo-etv" name="vobo" value="ETV" disabled/>ETV</p>
+
+                    <p class="vobo"></p><input id="voboSitio2" type="text" name="" class="guardar" value="${corrInfo.voboSitio}" disabled>
                 </form>
             </div>
     `;
     forms.appendChild(formulario);
     guardarEstado();
+
+
+    //TRABAJANDO EN ESTO ACTUALMENTE
+
+    //Constantes para la función de agregar vobo
+    const agregarVobo = document.querySelector('#agregar-vobo');
+    const voboSucursal = document.querySelector('#vobo-sucursal');
+    const voboEtv = document.querySelector('#vobo-etv');
+    const vobo = document.querySelector('.vobo');
+    const voboSitio2 = document.querySelector('#voboSitio2')
+
+//Listener interno de agregar vobo, permite habilitar o deshabilitar los radio button
+    agregarVobo.addEventListener('change', ()=>{
+       if (agregarVobo.checked == true){
+        voboSucursal.disabled = false;
+        voboEtv.disabled = false;
+        voboSitio2.disabled = false;
+       }else{
+        voboSucursal.disabled = true;
+        voboEtv.disabled = true;
+        voboSitio2.value = "";
+        voboSitio2.disabled = true;
+        vobo.textContent = "";
+       }
+    })
+
+    voboSucursal.addEventListener('change', ()=>{
+        console.log("Hola desde voboSucursal")
+        vobo.textContent = " VoBo de Sucursal"
+
+    })
+
+    voboEtv.addEventListener('change', ()=>{
+        console.log("Hola desde voboEtv")
+        vobo.textContent = " VoBo de ETV"
+    })
+
+console.log("Hola fuera")
+
 }
 
 function cargos(cargoValor,otroCargo){
@@ -501,6 +562,13 @@ function cargos(cargoValor,otroCargo){
     
 }
 
+
+//Función para habilitar o deshabilitar la sección de vobo de sitio o ETV
+function habilitarDeshabilitarVoBo(){
+    console.log("Habilitado")
+}
+
+
 //Avisa al usuario en caso de no tener su nombre, ingresar su nombre.
 function preguntaNombre(){
     alert('NO SE DETECTO NOMBRE DE IDC');
@@ -511,7 +579,7 @@ function preguntaNombre(){
 //Permite guardar estado al salir de cada formulario
 function guardarEstado(){
     const guardar = document.querySelectorAll('.guardar');
-    console.log(guardar);
+    
 
     for (let index = 0; index < guardar.length; index++) {
         guardar[index].addEventListener('blur',()=>{
@@ -625,12 +693,14 @@ function guardandoInstalaciones(){
     infoInst.NSInstalada = document.querySelector('#NSInstalada').value;
     infoInst.NSRetirada = document.querySelector('#NSRetirada').value;
     infoInst.kilometros = document.querySelector('#kilometros').value;
-    console.log(infoInst);
+    
+    
 
     //transformar en texto para guardarlo en local
     infoString = JSON.stringify(infoInst);
 
-    console.log(infoString);
+    
+    
     //guardar en local
     localStorage.setItem('infoInstalaciones',infoString);
 }
@@ -640,13 +710,9 @@ function guardandoInstalaciones(){
 function guardandoCorrectivos(){
     corrInfo.id = document.querySelector('#id2').value;
     corrInfo.nombreSitio = document.querySelector("#nombreSitio2").value;
-    
     corrInfo.serieEquipo = document.querySelector('#serieEquipo2').value;
-    
     corrInfo.encontroCajero = document.querySelector('#encontroCajero2').value;
-    
     corrInfo.codigoError = document.querySelector('#codigoError2').value;
-    
     corrInfo.causa = document.querySelector('#causa2').value;
     corrInfo.solucion = document.querySelector('#solucion2').value;
     
@@ -674,12 +740,14 @@ function guardandoCorrectivos(){
     corrInfo.voboBanco = document.querySelector('#voboBanco2').value;
     corrInfo.voboSitio = document.querySelector('#voboSitio2').value;
     
-    console.log(corrInfo);
+    
+    
 
     //transformar en texto para guardarlo en local
     infoString = JSON.stringify(corrInfo);
 
-    console.log(infoString);
+    
+    
     //guardar en local
     localStorage.setItem('infoCorrectivos',infoString);
 }
