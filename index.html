@@ -1,33 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="José Carlos Robles Arechiga" />
+    <meta name="author" content="J0S3-C4RL05-R0BL35" />
     <meta name="copyright" content="José Carlos Robles Arechiga" />
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/app.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="manifest" href="./manifest.json">
     <title>Generador de Layout</title>
 </head>
+
 <body>
     <div class="content">
-        <h1 class="titulo">GENERADOR DE LAYOUT V3.1.0</h1>
+        <h1 class="titulo">GENERADOR DE LAYOUT V4.1.0</h1>
         <div class="botones">
             <a href="#" class="btnCorrectivos">Servicios</a>
-            <a href="#" class="btnInstalaciones">Instalaciones</a>
-            <div class="formularios" id="formulario">            
+            <a href="#" class="btnInstalaciones" hidden="true">Instalaciones</a>
+            <div class="formularios" id="formulario">
+            </div>
+            <a href="#" class="btnLayout">Plantillas guardadas</a>
+            <a href="#" class="btnSalvar deshabilitar">Guardar actual</a>
+            <a href="#" class="btnLimpiar">Limpiar formulario</a>
+            <a href="#" class="btnGenerar deshabilitar">Generar layout</a>
+            <a href="#" class="btnCopiar deshabilitar">Copiar</a>
         </div>
-        <!-- <a href="#" class="btnLayout">Plantillas guardadas</a> -->
-        <a href="#" class="btnLimpiar" >Limpiar formulario</a>
-        <a href="#" class="btnGenerar deshabilitar" >Generar layout</a>
-        <a href="#" class="btnCopiar deshabilitar">Copiar</a>
+        <div class="salida-plantilla">
+        </div>
     </div>
-    <div class="salida-plantilla">
-    </div>
-</div>
-<script src="./js/app.js"></script>
-</body>
-</html>
 
+    <!-- =========================================
+     BOTÓN DE CAMBIO DE TEMA (Dark Mode)
+     ========================================= -->
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+        🌙
+    </button>
+
+    <script src="./js/app.js"></script>
+</body>
+
+</html>
