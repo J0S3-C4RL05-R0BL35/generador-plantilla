@@ -357,7 +357,7 @@ function copiarLayout(e) {
 
     navigator.clipboard.writeText(elemento)
         .then(() => {
-            alert('Precaución: Antes de cerrar servicio revisa detenidamente toda la infornación.');
+            alert('Precaución: Antes de cerrar servicio revisa detenidamente toda la información.');
         })
         .catch(() => {
             console.log('Algo salio mal...', err)
@@ -1095,3 +1095,4 @@ function retornarInfo() {
         corrInfo.comentarios = infoJson2.comentarios;
     }
 }
+
